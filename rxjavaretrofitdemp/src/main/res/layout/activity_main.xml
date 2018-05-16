@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="实际用例：无限轮询"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="变换操作符Map(),整形转换为字符串类型"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn1" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="变换操作符FlatMap(),无序的将被观察者发送的事件序列进行变换"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn2" />
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="变换操作符ConcatMap(),有序的将被观察者发送的事件序列进行变换"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn3" />
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="变换操作符Buffer(),缓存被观察者发送的事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn4" />
+
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="变换操作符实际用例：网络请求嵌套回调"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn5" />
+
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="组合操作符,concat()/concatArray()，按发送顺序串行执行"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn6" />
+
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="组合操作符,merge()/mergeArray()，按时间线并行执行"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn7" />
+
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="组合操作符,concatDelayError()/mergeDelayError()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn8" />
+
+        <Button
+            android:id="@+id/btn10"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并操作符,zip()按个数合并，即1对1合并"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn9" />
+
+        <Button
+            android:id="@+id/btn11"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并操作符,combineLatest()/combineLatestDelayError()同一时间点按时间合并"
+            android:textAllCaps="false"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn10" />
+
+        <Button
+            android:id="@+id/btn12"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并操作符,reduce()聚合"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn11" />
+
+        <Button
+            android:id="@+id/btn13"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并操作符,collect()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn12" />
+
+        <Button
+            android:id="@+id/btn14"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="发送事件前追加发送事件,后调用先追加,startWith()/startWithArray()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn13" />
+
+        <Button
+            android:id="@+id/btn15"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="统计发送事件数量,count()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn14" />
+
+        <Button
+            android:id="@+id/btn16"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并/组合操作符实际用例：合并数据源，同时展示"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn15" />
+
+        <Button
+            android:id="@+id/btn17"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="合并/组合操作符实际用例：从磁盘/内存缓存中,获取缓存数据"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn16" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="请填写姓名"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn17" />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="请填写年龄"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+        <EditText
+            android:id="@+id/etJob"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="请填写职业"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/etAge" />
+
+        <Button
+            android:id="@+id/btn18"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="合并/组合操作符实际用例：联合判断多个事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/etJob" />
+
+        <Button
+            android:id="@+id/btn19"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：subscribe()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn18" />
+
+        <Button
+            android:id="@+id/btn20"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：delay()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn19" />
+
+        <Button
+            android:id="@+id/btn21"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：do(),在某个事件的生命周期中调用"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn20" />
+
+        <Button
+            android:id="@+id/btn22"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：onErrorReturn()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn21" />
+
+        <Button
+            android:id="@+id/btn23"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：onErrorResumeNext()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn22" />
+
+        <Button
+            android:id="@+id/btn24"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：onExceptionResumeNext()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn23" />
+
+        <Button
+            android:id="@+id/btn25"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：retry()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn24" />
+
+        <Button
+            android:id="@+id/btn26"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：retryUntil()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn25" />
+
+        <Button
+            android:id="@+id/btn27"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：retryWhen()，错误处理"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn26" />
+
+        <Button
+            android:id="@+id/btn28"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：repeat()，无条件地、重复发送 被观察者事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn27" />
+
+        <Button
+            android:id="@+id/btn29"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符：repeatWhen()，有条件地、重复发送 被观察者事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn28" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
+
+
