@@ -321,6 +321,38 @@
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/btn28" />
 
+        <!-- 以下还没有测试 -->
+        <Button
+            android:id="@+id/btn30"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符应用实例：线程控制(切换/调度)"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn29" />
+
+        <Button
+            android:id="@+id/btn31"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符应用实例：有条件轮询,测试采用repeatWhen()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn30" />
+
+        <Button
+            android:id="@+id/btn32"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="功能性操作符应用实例：发送网络请求时的差错重连"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn31" />
+
+        <!-- 以上还没有测试 -->
 
     </android.support.constraint.ConstraintLayout>
 
