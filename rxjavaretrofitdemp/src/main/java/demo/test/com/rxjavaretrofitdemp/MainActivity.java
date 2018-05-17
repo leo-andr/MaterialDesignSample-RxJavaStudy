@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14,
             btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25, btn26, btn27,
-            btn28, btn29;
+            btn28, btn29, btn30, btn31, btn32, btn33, btn34, btn35, btn36, btn37, btn38, btn39, btn40,
+            btn41, btn42, btn43, btn44, btn45;
     EditText etName, etAge, etJob;
 
     @Override
@@ -82,6 +84,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn27 = findViewById(R.id.btn27);
         btn28 = findViewById(R.id.btn28);
         btn29 = findViewById(R.id.btn29);
+        btn30 = findViewById(R.id.btn30);
+        btn31 = findViewById(R.id.btn31);
+        btn32 = findViewById(R.id.btn32);
+        btn33 = findViewById(R.id.btn33);
+        btn34 = findViewById(R.id.btn34);
+        btn35 = findViewById(R.id.btn35);
+        btn36 = findViewById(R.id.btn36);
+        btn37 = findViewById(R.id.btn37);
+        btn38 = findViewById(R.id.btn38);
+        btn39 = findViewById(R.id.btn39);
+        btn40 = findViewById(R.id.btn40);
+        btn41 = findViewById(R.id.btn41);
+        btn42 = findViewById(R.id.btn42);
+        btn43 = findViewById(R.id.btn43);
+        btn44 = findViewById(R.id.btn44);
+        btn45 = findViewById(R.id.btn45);
 
         etName = findViewById(R.id.etName);
         etAge = findViewById(R.id.etAge);
@@ -116,6 +134,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn27.setOnClickListener(this);
         btn28.setOnClickListener(this);
         btn29.setOnClickListener(this);
+        btn30.setOnClickListener(this);
+        btn31.setOnClickListener(this);
+        btn32.setOnClickListener(this);
+        btn33.setOnClickListener(this);
+        btn34.setOnClickListener(this);
+        btn35.setOnClickListener(this);
+        btn36.setOnClickListener(this);
+        btn37.setOnClickListener(this);
+        btn38.setOnClickListener(this);
+        btn39.setOnClickListener(this);
+        btn40.setOnClickListener(this);
+        btn41.setOnClickListener(this);
+        btn42.setOnClickListener(this);
+        btn43.setOnClickListener(this);
 
         // 联合条件判断 可否点击按钮
         jointJudgment();
@@ -226,6 +258,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn29:
                 repeatWhenDemo();
+                break;
+            case R.id.btn30:
+                threadSchedulingDemo();
+                break;
+            case R.id.btn31:
+                hasConditionalPollingDemo();
+                break;
+            case R.id.btn32:
+                requestErrorReconnectionDemo();
+                break;
+            case R.id.btn33:
+                filterDemo();
+                break;
+            case R.id.btn34:
+                ofTypeDemo();
+                break;
+            case R.id.btn35:
+                skipOrSkipLastDemo();
+                break;
+            case R.id.btn36:
+                distinctOrDistinctUntilChangedDemo();
+                break;
+            case R.id.btn37:
+                takeDemo();
+                break;
+            case R.id.btn38:
+                takeLastDemo();
+                break;
+            case R.id.btn39:
+                throttleDemo();
+                break;
+            case R.id.btn40:
+                throttleWithTimeoutOrDebounceDemo();
+                break;
+            case R.id.btn41:
+                firstElementOrLastElementDemo();
+                break;
+            case R.id.btn42:
+                elementAtDemo();
+                break;
+            case R.id.btn43:
+                elementAtOrErrorDemo();
+                break;
+            case R.id.btn44:
+                functionalAntiShake();
+                break;
+            case R.id.btn45:
+                searchOptimizationDemo();
                 break;
             default:
                 break;
@@ -1816,7 +1896,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                return Observable.error(new Throwable("retryWhen终止啦"));
 
                                 // 2. 若返回的Observable发送的事件 = Next事件，则原始的Observable重新发送事件（若持续遇到错误，则持续重试）
-                                 return Observable.just(1);
+                                return Observable.just(1);
                             }
                         });
                     }
@@ -1852,7 +1932,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 注：
         // 1. 接收到.onCompleted()事件后，触发重新订阅 & 发送
         // 2. 默认运行在一个新的线程上
-        Observable.just(1,2,3,4)
+        Observable.just(1, 2, 3, 4)
 //                .repeat() // 无限次重复
                 .repeat(3) // 重复创建次数 = 3次
                 .subscribe(new Observer<Integer>() {
@@ -1886,7 +1966,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 2.若新被观察者（Observable）返回其余事件时，则重新订阅 & 发送原来的 Observable
      */
     private void repeatWhenDemo() {
-        Observable.just(1,2,3,4)
+        Observable.just(1, 2, 3, 4)
                 // 在Function函数中，必须对输入的 Observable<Object>进行处理，这里我们使用的是flatMap操作符接收上游的数据
                 .repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
                     @Override
@@ -1909,7 +1989,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 // 返回Error事件 = 回调onError（）事件，并接收传过去的错误信息。
 
                                 // 情况2：若新被观察者（Observable）返回其余事件，则重新订阅 & 发送原来的 Observable
-                                 return Observable.just(1);
+                                return Observable.just(1);
                                 // 仅仅是作为1个触发重新订阅被观察者的通知，发送的是什么数据并不重要，只要不是Complete（） /  Error（）事件
                             }
                         });
@@ -1937,5 +2017,778 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * 功能性操作符应用实例：线程控制(切换/调度)
+     * 在RxJava模型中，被观察者(Observable)/观察者(Observer)的工作线程 = 创建自身的线程
+     * 即：若被观察者/观察者在主线程被创建，那么他们的工作(生产事件/接收&响应事件)就发生在主线程
+     * 对于一般的需求场景，需要在子线程中实现耗时的操作；然后回到主线程实现UI操作
+     * 1.被观察者(Observable)在子线程中生产事件(如实现耗时操作)
+     * 2.观察者(Observer)在主线程接收&响应事件(实现UI操作)
+     */
+    private void threadSchedulingDemo() {
+        // 多种线程调度的类型
+        // 1.Schedules.immediate()          当前线程 = 不指定线程    默认场景
+        // 2.AndroidSchedules.mainThread()  Android主线程            操作UI
+        // 3.Schedules.newThread()          常规新线程               耗时等操作
+        // 4.Schedules.io()                 io操作线程               网络请求、读写文件等io密集型操作
+        // 5.Schedules.computation()        CPU计算操作线程           大量继续操作
+
+        // 1.若Observable.subscribe()多次指定被观察者生产事件的线程
+        //          则只有第1次指定的有效，其余线程无效
+        // 2.若Observable.observeOn（）多次指定观察者 接收 & 响应事件的线程，
+        //          则每次指定均有效，即每指定一次，就会进行一次线程的切换
+
+
+    }
+
+    /**
+     * 记录轮询次数
+     */
+    private int i = 0;
+
+    /**
+     * 功能性操作符应用实例：有条件轮询,测试采用repeatWhen()
+     * 背景：客户端隔固定时间主动向服务器发送请求获取信息，可根据服务器返回停止轮询(有条件轮询)
+     * 冲突：之前的实现方式较为复杂&可扩展性差：Handler发送延时消息/Timer定时器
+     * 解决方案：才用RxJava中repeatWhen()操作符
+     * 功能说明：采用Get方法对 金山词霸API 按规定时间重复发送网络请求，从而模拟 轮询 需求实现
+     * 1.停止轮询的条件 = 当轮询到第4次
+     * 2.采用 Gson 进行数据解析
+     */
+    private void hasConditionalPollingDemo() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://fy.iciba.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Observable<Translation> observable = apiInterface.getTranslationData("hello%20world");
+
+        observable.repeatWhen(new Function<Observable<Object>, ObservableSource<?>>() {
+            @Override
+            public ObservableSource<?> apply(Observable<Object> objectObservable) throws Exception {
+                return objectObservable.flatMap(new Function<Object, ObservableSource<?>>() {
+
+                    @Override
+                    public ObservableSource<?> apply(Object o) throws Exception {
+                        // 加入判断条件：当轮询次数 = 5次后，就停止轮询
+                        if (i > 3) {
+                            // 此处选择发送onError事件以结束轮询，因为可触发下游观察者的onError（）方法回调
+                            // Observable.empty() = 发送Complete事件，但不会回调观察者的onComplete（）
+                            return Observable.error(new Throwable("停止轮询"));
+                        }
+                        // 若轮询次数＜4次，则发送1Next事件以继续轮询
+                        // 注：此处加入了delay操作符，作用 = 延迟一段时间发送（此处设置 = 2s），以实现轮询间间隔设置
+                        return Observable.just(1).delay(2, TimeUnit.SECONDS);
+                    }
+                });
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Translation>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(Translation translation) {
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onNext: " + i);
+                        i++;
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onNext: " + i);
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onNext: " + translation.getContent().getOut());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // 获取轮询结束信息
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "有条件轮询,测试采用repeatWhen() - onComplete: ");
+                    }
+                });
+
+    }
+
+    /**
+     * 可重试次数
+     */
+    private int maxConnecCount = 10;
+    /**
+     * 当前已重试次数
+     */
+    private int currentRetryCount = 0;
+    /**
+     * 重试等待时间
+     */
+    private int waitRetryTime = 0;
+
+    /**
+     * 功能性操作符应用实例：发送网络请求时的差错重连
+     * 背景：发送网络请求过程中，会出现某些错误，从而导致请求失败
+     * 解决方案：当发生错误请求失败时，自动重新发送网络请求，即差错自动重试机制
+     * 实现原理：采用RxJava中的retryWhen()操作符
+     * 具体说明：根据出错的错误类型，判断是否重试
+     * 1.所有网络错误异常都属于I/O异常 = IOException
+     * 2.其余异常都不在重试范围内
+     * 若要重试，设置退避策略
+     * 1.为请求重试设置1个合理的退避算法，而不是一出现错误马上重试
+     * 2.合理的退避算法：
+     * 1)遇到错误时应等待一段时间后再试
+     * 2)若遇到的错误异常次数越多，(等待)退避时间应该越长
+     * 3)限制可重复次数，避免无限重试
+     * 4)功能总结：设置等待时间(随着错误异常次数真多可改变)，设置重复次数
+     * 实例说明：用Get方法对 金山词霸API 发送网络请求
+     * 1.通过 断开网络连接 模拟 网络异常错误（恢复网络即可成 功发送请求）
+     * 2.限制重试次数 = 10次
+     * 3.采用 Gson 进行数据解析
+     */
+    private void requestErrorReconnectionDemo() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://fy.iciba.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Observable<Translation> observable = apiInterface.getTranslationData("hello%20world");
+
+        // 发送网络请求 & 通过retryWhen（）进行重试
+        // 注：主要异常才会回调retryWhen（）进行重试
+        observable.retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+            @Override
+            public ObservableSource<?> apply(Observable<Throwable> throwableObservable) throws Exception {
+                // 参数Observable<Throwable>中的泛型 = 上游操作符抛出的异常，可通过该条件来判断异常的类型
+                return throwableObservable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(Throwable throwable) throws Exception {
+                        Log.e(TAG, "发送网络请求时的差错重连retryWhen() - 发生异常 : " + throwable.toString());
+
+                        /**
+                         * 需求1：根据异常类型选择是否重试
+                         * 即，当发生的异常 = 网络异常 = IO异常 才选择重试
+                         */
+                        if (throwable instanceof IOException) {
+                            Log.e(TAG, "属于IO异常，需重试");
+                            /**
+                             * 需求2：限制重试次数
+                             * 即，当已重试次数 < 设置的重试次数，才选择重试
+                             */
+                            if (currentRetryCount < maxConnecCount) {
+                                // 记录重试次数
+                                currentRetryCount++;
+                                Log.e(TAG, "重试次数 = " + currentRetryCount);
+
+                                /**
+                                 * 需求2：实现重试
+                                 * 通过返回的Observable发送的事件 = Next事件，从而使得retryWhen（）重订阅，最终实现重试功能
+                                 *
+                                 * 需求3：延迟1段时间再重试
+                                 * 采用delay操作符 = 延迟一段时间发送，以实现重试间隔设置
+                                 *
+                                 * 需求4：遇到的异常越多，时间越长
+                                 * 在delay操作符的等待时间内设置 = 每重试1次，增多延迟重试时间1s
+                                 */
+                                // 设置等待时间
+                                waitRetryTime = 1000 + currentRetryCount * 1000;
+                                Log.e(TAG, "等待时间 = " + waitRetryTime);
+                                // TimeUnit.DAYS 天
+                                // TimeUnit.HOURS 小时
+                                // TimeUnit.MICROSECONDS 微秒
+                                // TimeUnit.MILLISECONDS 毫秒
+                                // TimeUnit.MINUTES 分钟
+                                // TimeUnit.NANOSECONDS 纳秒
+                                // TimeUnit.SECONDS 秒
+                                return Observable.just(1).delay(waitRetryTime, TimeUnit.MILLISECONDS);
+                            } else {
+                                // 若重试次数已 > 设置重试次数，则不重试
+                                // 通过发送error来停止重试（可在观察者的onError（）中获取信息）
+                                return Observable.error(new Throwable("重试次数已超过设置次数 = " + currentRetryCount + "，即 不再重试"));
+                            }
+
+                        } else {
+                            // 若发生的异常不属于I/O异常，则不重试
+                            // 通过返回的Observable发送的事件 = Error事件 实现（可在观察者的onError（）中获取信息）
+                            return Observable.error(new Throwable("发生了非网络异常（非I/O异常）"));
+                        }
+                    }
+                });
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Translation>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "发送网络请求时的差错重连retryWhen() - onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(Translation translation) {
+                        Log.e(TAG, "发送网络请求时的差错重连retryWhen() - onNext: " + translation.getContent().getOut());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "发送网络请求时的差错重连retryWhen() - onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "发送网络请求时的差错重连retryWhen() - onComplete: ");
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，filter(),过滤特定条件的事件
+     */
+    private void filterDemo() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                // 1. 发送5个事件
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+                emitter.onNext(4);
+                emitter.onNext(5);
+            }
+            // 2. 采用filter（）变换操作符
+        }).filter(new Predicate<Integer>() {
+            // 根据test()的返回值 对被观察者发送的事件进行过滤 & 筛选
+            // a. 返回true，则继续发送
+            // b. 返回false，则不发送（即过滤）
+            @Override
+            public boolean test(Integer integer) throws Exception {
+                // 本例子 = 过滤了整数≤3的事件
+                return integer > 3;
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.e(TAG, "过滤操作符，filter(),过滤特定条件的事件 - onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.e(TAG, "过滤操作符，filter(),过滤特定条件的事件 - onNext: " + integer);
+                // 4 5
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "过滤操作符，filter(),过滤特定条件的事件 - onError: " + e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "过滤操作符，filter(),过滤特定条件的事件 - onComplete: ");
+            }
+        });
+    }
+
+    /**
+     * 过滤操作符，ofType(),过滤特定数据类型的数据
+     * Byte、Short、Integer、Long、Double、Float、Character、Boolean
+     */
+    private void ofTypeDemo() {
+        Observable.just(1, "A", 2, "C", 3, "D", true, false)
+                .ofType(Integer.class) // 筛选出 整型数据
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "过滤操作符，ofType(),过滤Integer类型的数据 = " + integer);
+                    }
+                });
+
+        Observable.just(1, "A", 2, "C", 3, "D", true, false)
+                .ofType(Boolean.class) // 筛选出 Boolean数据
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        Log.e(TAG, "过滤操作符，ofType(),过滤Boolean类型的数据 = " + aBoolean);
+                    }
+                });
+
+        Observable.just(1, "A", 2, "C", 3, "D", true, false)
+                .ofType(String.class) // 筛选出 String数据
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String str) throws Exception {
+                        Log.e(TAG, "过滤操作符，ofType(),过滤String类型的数据 = " + str);
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，skip()/skipLast(),跳过某个事件
+     */
+    private void skipOrSkipLastDemo() {
+        // 1.根据顺序跳过数据项
+        Observable.just(1, 2, 3, 4, 5)
+                .skip(1) // 跳过正序的前1项
+                .skipLast(2) // 跳过正序的后2项
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "skip()/skipLast():根据顺序跳过数据项 " + integer);
+                        // 2 3
+                    }
+                });
+
+        // 2.根据时间跳过数据项
+        // 发送事件特点：从0开始发送5个数据，每隔1s发送一次，每次递增1；第1次发送延迟0s
+        Observable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
+                .skip(1, TimeUnit.SECONDS) // 跳过第1s发送的数据
+                .skipLast(1, TimeUnit.SECONDS) // 跳过最后1s发送的数据
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "skip()/skipLast():根据时间跳过数据项" + aLong);
+                        // 1 2 3
+                    }
+                });
+
+    }
+
+    /**
+     * 过滤操作符，distinct()/distinctUntilChanged(),过滤事件序列中重复的事件 / 连续重复的事件
+     */
+    private void distinctOrDistinctUntilChangedDemo() {
+        // 1：过滤事件序列中重复的事件
+        Observable.just(1, 2, 3, 1, 2)
+                .distinct()
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "过滤操作符，distinct(): " + integer);
+                        // 1 2 3
+                    }
+                });
+
+        // 2：过滤事件序列中 连续重复的事件
+        Observable.just(1, 2, 3, 1, 2, 3, 3, 4, 4)
+                .distinctUntilChanged()
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "过滤操作符，distinctUntilChanged(): " + integer);
+                        // 1 2 3 1 2 3 4
+                    }
+                });
+
+    }
+
+    /**
+     * 过滤操作符，take(),指定观察者最多能接收到的事件数量
+     */
+    private void takeDemo() {
+        Observable.just(1, 2, 3, 4, 5, 6, 7)
+                .take(2)
+                // 采用take（）变换操作符
+                // 指定了观察者只能接收2个事件
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "take(long count): " + integer);
+                        // 1 2
+                    }
+                });
+        Observable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
+                .take(3, TimeUnit.SECONDS)
+                // 采用take（）变换操作符
+                // 指定了观察者接受到延迟3次的事件
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "take(long time, TimeUnit unit):" + aLong);
+                        // 0 1 2
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，take(),指定观察者只能接收到被观察者发送的最后几个事件
+     */
+    private void takeLastDemo() {
+        Observable.just(1, 2, 3, 4, 5)
+                .takeLast(3)  //指定观察者只能接受被观察者发送的最后3个事件
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "takeLast(): " + integer);
+                        // 3 4 5
+                    }
+                });
+
+        // 0 1 2 3 4
+        Observable.intervalRange(0, 5, 0, 1, TimeUnit.SECONDS)
+                .takeLast(3, TimeUnit.SECONDS)
+                // 指定了观察者接受到最后延迟3次的事件
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "takeLast(long time, TimeUnit unit)" + aLong);
+                        // 2 3 4
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，throttleFirst()/throttleLast()/sample(),在某段时间内，只发送该段时间内第1次事件 / 最后1次事件
+     * 如，1段时间内连续点击按钮，但只执行第1次的点击操作
+     */
+    private void throttleDemo() {
+//        在某段时间内，只发送该段时间内第1次事件
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                // 隔段事件发送时间
+                e.onNext(1);
+                Thread.sleep(500);
+
+                e.onNext(2);
+                Thread.sleep(400);
+
+                e.onNext(3);
+                Thread.sleep(300);
+
+                e.onNext(4);
+                Thread.sleep(300);
+
+                e.onNext(5);
+                Thread.sleep(300);
+
+                e.onNext(6);
+                Thread.sleep(400);
+
+                e.onNext(7);
+                Thread.sleep(300);
+                e.onNext(8);
+
+                Thread.sleep(300);
+                e.onNext(9);
+
+                Thread.sleep(300);
+                e.onComplete();
+            }
+        }).throttleFirst(1, TimeUnit.SECONDS)//每1秒中采用数据
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "开始采用subscribe连接");
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        Log.e(TAG, "接收到了事件" + value);
+                        // 1 4 7
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "对Complete事件作出响应");
+                    }
+                });
+
+
+//        在某段时间内，只发送该段时间内最后1次事件
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                // 隔段事件发送时间
+                e.onNext(1);
+                Thread.sleep(500);
+
+                e.onNext(2);
+                Thread.sleep(400);
+
+                e.onNext(3);
+                Thread.sleep(300);
+
+                e.onNext(4);
+                Thread.sleep(300);
+
+                e.onNext(5);
+                Thread.sleep(300);
+
+                e.onNext(6);
+                Thread.sleep(400);
+
+                e.onNext(7);
+                Thread.sleep(300);
+                e.onNext(8);
+
+                Thread.sleep(300);
+                e.onNext(9);
+
+                Thread.sleep(300);
+                e.onComplete();
+            }
+        }).throttleLast(1, TimeUnit.SECONDS)//每1秒中采用数据
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "开始采用subscribe连接");
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        Log.e(TAG, "接收到了事件" + value);
+                        // 3 6 9
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "对Complete事件作出响应");
+                    }
+                });
+
+        // sample() 与 throttleLast（） 操作符类似
+        // 在某段时间内，只发送该段时间内最新（最后）1次事件
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                // 隔段事件发送时间
+                e.onNext(1);
+                Thread.sleep(500);
+
+                e.onNext(2);
+                Thread.sleep(400);
+
+                e.onNext(3);
+                Thread.sleep(300);
+
+                e.onNext(4);
+                Thread.sleep(300);
+
+                e.onNext(5);
+                Thread.sleep(300);
+
+                e.onNext(6);
+                Thread.sleep(400);
+
+                e.onNext(7);
+                Thread.sleep(300);
+                e.onNext(8);
+
+                Thread.sleep(300);
+                e.onNext(9);
+
+                Thread.sleep(300);
+                e.onComplete();
+            }
+        })
+                .sample(1, TimeUnit.SECONDS)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "开始采用subscribe连接");
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        Log.e(TAG, "接收到了事件" + value);
+                        // 3 6 9
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "对Complete事件作出响应");
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，throttleWithTimeout()/debounce()
+     * 发送数据事件时，若2次发送事件的间隔＜指定时间，就会丢弃前一次的数据，
+     * todo 重点-----直到指定时间内都没有新数据发射时才会发送后一次的数据
+     */
+    private void throttleWithTimeoutOrDebounceDemo() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                // 隔段事件发送时间
+                e.onNext(1);
+                Thread.sleep(500);
+                e.onNext(2); // 1和2之间的间隔小于指定时间1s，所以前1次数据（1）会被抛弃，2会被保留
+                Thread.sleep(1500);  // 因为2和3之间的间隔大于指定时间1s，所以之前被保留的2事件将发出
+                e.onNext(3);
+                Thread.sleep(1500);  // 因为3和4之间的间隔大于指定时间1s，所以3事件将发出
+                e.onNext(4);
+                Thread.sleep(500); // 因为4和5之间的间隔小于指定时间1s，所以前1次数据（4）会被抛弃，5会被保留
+                e.onNext(5);
+                Thread.sleep(500); // 因为5和6之间的间隔小于指定时间1s，所以前1次数据（5）会被抛弃，6会被保留
+                e.onNext(6);
+                Thread.sleep(1500); // 因为6和Complete之间的间隔大于指定时间1s，所以之前被保留的6事件将发出
+
+                e.onComplete();
+            }
+        }).throttleWithTimeout(1, TimeUnit.SECONDS)//每1秒中采用数据
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        Log.e(TAG, "接收到了事件" + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "对Complete事件作出响应");
+                    }
+                });
+
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                // 隔段事件发送时间
+                e.onNext(1);
+                Thread.sleep(500);
+                e.onNext(2); // 1和2之间的间隔小于指定时间2s，所以前1次数据（1）会被抛弃，2会被保留
+                Thread.sleep(2500);  // 因为2和3之间的间隔大于指定时间2s，所以之前被保留的2事件将发出
+                e.onNext(3);
+                Thread.sleep(2500);  // 因为3和4之间的间隔大于指定时间2s，所以3事件将发出
+                e.onNext(4);
+                Thread.sleep(300); // 因为4和5之间的间隔小于指定时间2s，所以前1次数据（4）会被抛弃，5会被保留
+                e.onNext(5);
+                Thread.sleep(2000); // 因为5和6之间的间隔小于指定时间2s，所以前1次数据（5）会被抛弃，6会被保留
+                e.onNext(6);
+                Thread.sleep(2500); // 因为6和Complete实践之间的间隔大于指定时间2s，所以之前被保留的6事件将发出
+
+                e.onComplete();
+            }
+        }).debounce(2, TimeUnit.SECONDS)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer value) {
+                        Log.e(TAG, "接收到了事件" + value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "对Error事件作出响应");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "对Complete事件作出响应");
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，firstElement()/lastElement()，仅选取第1个元素 / 最后一个元素
+     */
+    private void firstElementOrLastElementDemo() {
+        // 获取第1个元素
+        Observable.just(1, 2, 3, 4, 5)
+                .firstElement()
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "firstElement() -  获取第1个元素 - " + integer);
+                        // 1
+                    }
+                });
+
+        // 获取最后1个元素
+        Observable.just(1, 2, 3, 4, 5)
+                .lastElement()
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "firstElement() -  获取最后1个元素 - " + integer);
+                        // 5
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，elementAt()，指定接收某个元素（通过 索引值 确定）
+     * 注：允许越界，即获取的位置索引 ＞ 发送事件序列长度
+     */
+    private void elementAtDemo() {
+        // 使用1：获取位置索引 = 2的 元素
+        // 位置索引从0开始
+        Observable.just(1, 2, 3, 4, 5)
+                .elementAt(2)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "elementAt(long index): " + integer);
+                    }
+                });
+
+        // 使用2：获取的位置索引 ＞ 发送事件序列长度时，设置默认参数
+        Observable.just(1, 2, 3, 4, 5)
+//                .elementAt(4, 6) // 5
+                .elementAt(6, 10) // 10
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "elementAt(long index, T defaultItem): " + integer);
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符，elementAtOrError()，在elementAt（）的基础上，
+     * 当出现越界情况（即获取的位置索引 ＞ 发送事件序列长度）时，即抛出异常崩溃
+     */
+    private void elementAtOrErrorDemo() {
+        Observable.just(1,2,3,4,5)
+                .elementAtOrError(6)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.e(TAG, "elementAtOrError(): " + integer);
+                    }
+                });
+    }
+
+    /**
+     * 过滤操作符实际应用：功能防抖
+     */
+    private void functionalAntiShake() {
+
+    }
+
+    /**
+     * 过滤操作符实际应用：联想搜索优化
+     */
+    private void searchOptimizationDemo() {
+
+    }
 
 }

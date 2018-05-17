@@ -321,7 +321,6 @@
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/btn28" />
 
-        <!-- 以下还没有测试 -->
         <Button
             android:id="@+id/btn30"
             android:layout_width="match_parent"
@@ -352,7 +351,135 @@
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/btn31" />
 
-        <!-- 以上还没有测试 -->
+        <Button
+            android:id="@+id/btn33"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，filter(),过滤特定条件的事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn32" />
+
+        <Button
+            android:id="@+id/btn34"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，ofType(),过滤特定数据类型的数据"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn33" />
+
+        <Button
+            android:id="@+id/btn35"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，skip()/skipLast(),跳过某个事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn34" />
+
+        <Button
+            android:id="@+id/btn36"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，distinct()/distinctUntilChanged(),过滤事件序列中重复的事件 / 连续重复的事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn35" />
+
+        <Button
+            android:id="@+id/btn37"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，take(),指定观察者最多能接收到的事件数量"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn36" />
+
+        <Button
+            android:id="@+id/btn38"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，take(),指定观察者只能接收到被观察者发送的最后几个事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn37" />
+
+        <Button
+            android:id="@+id/btn39"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，throttleFirst()/throttleLast()/sample(),在某段时间内，只发送该段时间内第1次事件 / 最后1次事件"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn38" />
+
+        <Button
+            android:id="@+id/btn40"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，throttleWithTimeout()/debounce()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn39" />
+
+        <Button
+            android:id="@+id/btn41"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，firstElement()/lastElement()，仅选取第1个元素 / 最后一个元素"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn40" />
+
+        <Button
+            android:id="@+id/btn42"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，elementAt()，指定接收某个元素（通过 索引值 确定）"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn41" />
+
+        <Button
+            android:id="@+id/btn43"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符，elementAtOrError()，在elementAt（）的基础上，当出现越界情况（即获取的位置索引 ＞ 发送事件序列长度）时，即抛出异常"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn42" />
+
+        <Button
+            android:id="@+id/btn44"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符实际应用：功能防抖"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn43" />
+
+        <Button
+            android:id="@+id/btn45"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="过滤操作符实际应用：联想搜索优化"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn44" />
 
     </android.support.constraint.ConstraintLayout>
 
