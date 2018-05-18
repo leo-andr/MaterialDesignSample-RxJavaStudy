@@ -471,15 +471,65 @@
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/btn43" />
 
+        <!-- 用于输入搜索的字符 -->
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="输入搜索字段"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn44" />
+
+        <!-- 用于显示联想搜索的结果 -->
+        <TextView
+            android:id="@+id/tvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+
         <Button
             android:id="@+id/btn45"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
-            android:text="过滤操作符实际应用：联想搜索优化"
+            android:text="条件/布尔操作符：all()/takeWhile()/takeUntil()"
             android:textAllCaps="false"
             android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@+id/btn44" />
+            app:layout_constraintTop_toBottomOf="@+id/tvSearch" />
+
+        <Button
+            android:id="@+id/btn46"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="条件/布尔操作符：skipWhile()/skipUntil()/sequenceEqual()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn45" />
+
+        <Button
+            android:id="@+id/btn47"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="条件/布尔操作符：contains()/isEmpty()/amb()/defaultIfEmpty()"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn46" />
+
+        <Button
+            android:id="@+id/btn48"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="背压策略"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn47" />
 
     </android.support.constraint.ConstraintLayout>
 

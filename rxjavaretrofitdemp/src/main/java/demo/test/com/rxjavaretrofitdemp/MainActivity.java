@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.io.IOException;
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14,
             btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25, btn26, btn27,
             btn28, btn29, btn30, btn31, btn32, btn33, btn34, btn35, btn36, btn37, btn38, btn39, btn40,
-            btn41, btn42, btn43, btn44, btn45;
-    EditText etName, etAge, etJob;
+            btn41, btn42, btn43, btn44, btn45, btn46, btn47, btn48;
+    EditText etName, etAge, etJob, etSearch;
+    TextView tvSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +103,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn43 = findViewById(R.id.btn43);
         btn44 = findViewById(R.id.btn44);
         btn45 = findViewById(R.id.btn45);
+        btn46 = findViewById(R.id.btn46);
+        btn47 = findViewById(R.id.btn47);
+        btn48 = findViewById(R.id.btn48);
 
         etName = findViewById(R.id.etName);
         etAge = findViewById(R.id.etAge);
         etJob = findViewById(R.id.etJob);
+        etSearch = findViewById(R.id.etSearch);
+
+        tvSearch = findViewById(R.id.tvSearch);
 
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -148,9 +157,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn41.setOnClickListener(this);
         btn42.setOnClickListener(this);
         btn43.setOnClickListener(this);
+//        btn44.setOnClickListener(this);
+        btn45.setOnClickListener(this);
+        btn46.setOnClickListener(this);
+        btn47.setOnClickListener(this);
+        btn48.setOnClickListener(this);
 
         // 联合条件判断 可否点击按钮
         jointJudgment();
+
+        // throttleFirst()功能防抖
+        functionalAntiShake();
+
+        // debounce()联合搜索优化
+        searchOptimization();
 
 //        JSONObject jsonObject = new JSONObject();
 //        JSONObject quotesObj = new JSONObject();
@@ -260,13 +280,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 repeatWhenDemo();
                 break;
             case R.id.btn30:
-                threadSchedulingDemo();
+                threadScheduling();
                 break;
             case R.id.btn31:
-                hasConditionalPollingDemo();
+                hasConditionalPolling();
                 break;
             case R.id.btn32:
-                requestErrorReconnectionDemo();
+                requestErrorReconnection();
                 break;
             case R.id.btn33:
                 filterDemo();
@@ -301,11 +321,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn43:
                 elementAtOrErrorDemo();
                 break;
-            case R.id.btn44:
-                functionalAntiShake();
-                break;
+//            case R.id.btn44:
+//                functionalAntiShake();
+//                break;
             case R.id.btn45:
-                searchOptimizationDemo();
+                allTakeWhileTakeUntilDemo();
+                break;
+            case R.id.btn46:
+                skipWhileSkipUntilSequenceEqualDemo();
+                break;
+            case R.id.btn47:
+                containsIsEmptyAmbDefaultIfEmptyDemo();
+                break;
+            case R.id.btn48:
+                backPressureStrategy();
                 break;
             default:
                 break;
@@ -531,6 +560,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 变换操作符实际用例：网络请求嵌套回调
      * 结合 RxJava2中的变换操作符FlatMap（）实现嵌套网络请求
+     * 需要进行嵌套网络请求：即在第1个网络请求成功后，继续再进行一次网络请求
+     * 如 先进行 用户注册 的网络请求, 待注册成功后回再继续发送 用户登录 的网络请求
      */
     private void nestedCallBacks() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -576,14 +607,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void accept(Translation translation) throws Exception {
                         Log.e(TAG, "第2次网络请求成功");
-                        Log.e(TAG, "accept: " + translation.getContent().getOut());
-                        Log.e(TAG, "accept: " + translation.toString());
+                        Log.e(TAG, "translation: " + translation.getContent().getOut());
+                        Log.e(TAG, "translation: " + translation.toString());
                         // 对第1次网络请求返回的结果进行操作 = 显示翻译结果
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e(TAG, "登录失败 - accept: " + throwable.toString());
+                        Log.e(TAG, "登录失败 - throwable: " + throwable.toString());
                     }
                 });
     }
@@ -1008,14 +1039,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
 
+    String result = "数据源来自 = ";
+
     /**
      * 合并/组合操作符实际用例：合并数据源，同时展示
      * 此处采用merge()&zip()
      * merge() 实现较为简单的从(网络+本地)获取数据&同一展示
-     * zip() 结合Retrofit与RxJava，实现较为复杂的合并2个网络请求向2个服务器获取数据&同意展示
+     * zip() 结合Retrofit与RxJava，实现较为复杂的合并2个网络请求向2个服务器获取数据&统一展示
      */
-    String result = "数据源来自 = ";
-
     private void mergeDataAndShow() {
         // a.采用merge()操作符
         /**
@@ -1093,6 +1124,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 合并/组合操作符实际用例：从磁盘/内存缓存中,获取缓存数据
+     * 背景：需要向服务器获取数据
+     * 冲突：每次获取数据都通过网络请求，浪费资源(流量时间)
+     * 解决方案：从缓存中读物数据
+     * 当需要获取数据时，先从本地磁盘/内存缓存获取，若缓存没有，则通过网络获取
+     * 实现原理：组合操作符concat()   过滤操作符firstElement
      */
     private void getDataFromDiskAndCaches() {
         // 2变量用于模拟内存缓存 & 磁盘缓存中的数据
@@ -1165,7 +1201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 合并/组合操作符实际用例：联合判断多个事件
-     * 填写表单 作为联合判断功能展示
+     * 如填写表单 作为联合判断功能展示
      * 即，表单里所有信息（姓名、年龄、职业等）都被填写后，才允许点击 "提交" 按钮
      * 采用 RxJava 组合操作符中的combineLatest（） 实现
      */
@@ -2025,7 +2061,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 1.被观察者(Observable)在子线程中生产事件(如实现耗时操作)
      * 2.观察者(Observer)在主线程接收&响应事件(实现UI操作)
      */
-    private void threadSchedulingDemo() {
+    private void threadScheduling() {
         // 多种线程调度的类型
         // 1.Schedules.immediate()          当前线程 = 不指定线程    默认场景
         // 2.AndroidSchedules.mainThread()  Android主线程            操作UI
@@ -2055,7 +2091,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 1.停止轮询的条件 = 当轮询到第4次
      * 2.采用 Gson 进行数据解析
      */
-    private void hasConditionalPollingDemo() {
+    private void hasConditionalPolling() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://fy.iciba.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -2146,7 +2182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 2.限制重试次数 = 10次
      * 3.采用 Gson 进行数据解析
      */
-    private void requestErrorReconnectionDemo() {
+    private void requestErrorReconnection() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://fy.iciba.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -2446,19 +2482,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 // 隔段事件发送时间
-                e.onNext(1);
+                e.onNext(1);  // -- 1发出去 0s
                 Thread.sleep(500);
 
-                e.onNext(2);
+                e.onNext(2); // -- 2发出去 0.5s
                 Thread.sleep(400);
 
-                e.onNext(3);
+                e.onNext(3); // -- 3发出去 0.9s
                 Thread.sleep(300);
 
-                e.onNext(4);
+                e.onNext(4); // -- 4发出去 1.2s
                 Thread.sleep(300);
 
-                e.onNext(5);
+                e.onNext(5);// -- 5发出去 1.5s
                 Thread.sleep(300);
 
                 e.onNext(6);
@@ -2474,7 +2510,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Thread.sleep(300);
                 e.onComplete();
             }
-        }).throttleFirst(1, TimeUnit.SECONDS)//每1秒中采用数据
+        }).throttleFirst(1, TimeUnit.SECONDS) // 每1秒中采用数据
                 .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -2504,19 +2540,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 // 隔段事件发送时间
-                e.onNext(1);
+                e.onNext(1);  // -- 1发出去 0s
                 Thread.sleep(500);
 
-                e.onNext(2);
+                e.onNext(2); // -- 2发出去 0.5s
                 Thread.sleep(400);
 
-                e.onNext(3);
+                e.onNext(3); // -- 3发出去 0.9s
                 Thread.sleep(300);
 
-                e.onNext(4);
+                e.onNext(4); // -- 4发出去 1.2s
                 Thread.sleep(300);
 
-                e.onNext(5);
+                e.onNext(5); // -- 5发出去 1.5s
                 Thread.sleep(300);
 
                 e.onNext(6);
@@ -2532,7 +2568,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Thread.sleep(300);
                 e.onComplete();
             }
-        }).throttleLast(1, TimeUnit.SECONDS)//每1秒中采用数据
+        }).throttleLast(1, TimeUnit.SECONDS) // 每1秒中采用数据
                 .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -2618,7 +2654,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 过滤操作符，throttleWithTimeout()/debounce()
-     * 发送数据事件时，若2次发送事件的间隔＜指定时间，就会丢弃前一次的数据，
+     * 发送数据事件时，若2次发送事件的间隔＜指定时间，就会丢弃前一次的数据，保留后一件事件
+     * 若2次发送事件的间隔>=指定时间，就会之前被保留的事件将发出
      * todo 重点-----直到指定时间内都没有新数据发射时才会发送后一次的数据
      */
     private void throttleWithTimeoutOrDebounceDemo() {
@@ -2651,6 +2688,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(Integer value) {
                         Log.e(TAG, "接收到了事件" + value);
+                        // 2 3 6
                     }
 
                     @Override
@@ -2677,7 +2715,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.onNext(4);
                 Thread.sleep(300); // 因为4和5之间的间隔小于指定时间2s，所以前1次数据（4）会被抛弃，5会被保留
                 e.onNext(5);
-                Thread.sleep(2000); // 因为5和6之间的间隔小于指定时间2s，所以前1次数据（5）会被抛弃，6会被保留
+                Thread.sleep(2000); // 因为5和6之间的间隔 >= 指定时间2s，之前被保留的5事件将发出
                 e.onNext(6);
                 Thread.sleep(2500); // 因为6和Complete实践之间的间隔大于指定时间2s，所以之前被保留的6事件将发出
 
@@ -2693,6 +2731,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(Integer value) {
                         Log.e(TAG, "接收到了事件" + value);
+                        // 2 3 5 6
                     }
 
                     @Override
@@ -2767,7 +2806,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 当出现越界情况（即获取的位置索引 ＞ 发送事件序列长度）时，即抛出异常崩溃
      */
     private void elementAtOrErrorDemo() {
-        Observable.just(1,2,3,4,5)
+        Observable.just(1, 2, 3, 4, 5)
                 .elementAtOrError(6)
                 .subscribe(new Consumer<Integer>() {
                     @Override
@@ -2779,15 +2818,304 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 过滤操作符实际应用：功能防抖
+     * 背景：用户只需要使用功能1次
+     * 冲突：由于外部原因，多次触发功能，导致出现冗余功能操作
+     * 例子：用户只需使用网络请求功能1次(点击按钮)
+     * 但网络不好，点击1次后用户发现无响应，多次点击，最终发出多个请求
+     * 解决方案：功能防抖
+     * 原理：通过根据指定时间 过滤事件 的过滤操作符实现，防止功能的抖动
+     * throttleFirst() 规定时间，仅会响应1次操作
      */
     private void functionalAntiShake() {
+        RxView.clicks(btn44).throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "功能防抖throttleFirst() - onSubscribe: ");
+                    }
 
+                    @Override
+                    public void onNext(Object o) {
+                        Log.e(TAG, "功能防抖throttleFirst() - onNext: ");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "功能防抖throttleFirst() - onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "功能防抖throttleFirst() - onComplete: ");
+                    }
+                });
     }
 
     /**
      * 过滤操作符实际应用：联想搜索优化
+     * 背景：每当用户输入一个字符，即显示与输入框内支字符关的搜索结果
+     * 基本流程：1.通过editText.addTextChangedListener()监听输入框变化
+     * 2.当输入框发生变化后，回调afterTextChanged() 将当前输入框内文字向服务器发起请求
+     * 3.服务器返回与该搜索文字相关联结果
+     * 冲突：在用户搜索需求明确情况下(体现为连续输入)，可能发起一些不必要的请求
+     * 例子：用户搜索需求明确 = abc,即连续输入了abc
+     * 按上面实现，客户端会向服务器发起a、ab、abc 3个网络请求
+     * 即：多发起了a、ab 2个不必要的请求
+     * 解决方案：通过根据指定时间过滤事件 的过滤操作符(debounce)实现，防止不必要的网络请求
+     * 功能说明：当输入框发生变化，不会立即将当前输入框内文字发送给服务器，而是等待一段时间
+     * 若在这段时间内，输入框内不再有文字输入(无变化时)，那么才发送输入框内文字给服务器
+     * 若在这段时间内，输入框有文字输入(发生变化)，则继续等待该段时间，循环上述事件
      */
-    private void searchOptimizationDemo() {
+    private void searchOptimization() {
+        /*
+         * 说明
+         * 1. 此处采用了RxBinding：RxTextView.textChanges(name) = 对对控件数据变更进行监听（功能类似TextWatcher），
+         *              需要引入依赖：compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+         * 2. 传入EditText控件，输入字符时都会发送数据事件（此处不会马上发送，因为使用了debounce（））
+         * 3. 采用skip(1)原因：跳过 第1次请求 = 初始输入框的空字符状态
+         **/
+        RxTextView.textChanges(etSearch)
+                .debounce(1, TimeUnit.SECONDS).skip(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CharSequence>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "过滤操作符实际应用：联想搜索优化debounce() - onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(CharSequence charSequence) {
+                        Log.e(TAG, "过滤操作符实际应用：联想搜索优化debounce() - onNext: " + charSequence.toString());
+                        tvSearch.setText("发送给服务器的字符 = " + charSequence.toString());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "过滤操作符实际应用：联想搜索优化debounce() - onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "过滤操作符实际应用：联想搜索优化debounce() - onComplete: ");
+                    }
+                });
+    }
+
+    /**
+     * 条件/布尔操作符：
+     * all() 判断发送的每项数据是否都满足 设置的函数条件,若满足，返回 true；否则，返回 false
+     * takeWhile() 判断发送的每项数据是否满足 设置函数条件,若发送的数据满足该条件，则发送该项数据；否则不发送
+     * takeUntil() 执行到某个条件时，停止发送事件
+     */
+    private void allTakeWhileTakeUntilDemo() {
+        // 1.all()
+        Observable.just(1, 2, 3, 4, 5, 6)
+                .all(new Predicate<Integer>() {
+                    @Override
+                    public boolean test(Integer integer) throws Exception {
+                        return integer <= 10;
+                        // 该函数用于判断Observable发送的数据是否都满足integer<=10
+                    }
+                }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                Log.e(TAG, "条件/布尔操作符：all(): " + aBoolean);
+                // true
+            }
+        });
+
+        // 2.takeWhile()
+        // 每1s发送1个数据 = 从0开始，递增1，即0、1、2、3、5、6
+        Observable.interval(1, TimeUnit.SECONDS)
+                .takeWhile(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return aLong < 3;
+                        // 当发送的数据满足<3时，才发送Observable的数据
+                    }
+                }).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Log.e(TAG, "条件/布尔操作符：takeWhile():  " + aLong);
+                // 0 1 2
+            }
+        });
+
+        // 3.takeUntil()
+        //      1)每1s发送1个数据 = 从0开始，递增1，即0、1、2、3、4
+        Observable.interval(1, TimeUnit.SECONDS)
+                .takeUntil(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return aLong > 3;
+                        // 返回true时，就停止发送事件
+                        // 当发送的数据满足>3时，就停止发送Observable的数据
+                    }
+                }).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Log.e(TAG, "条件/布尔操作符：takeUntil(1):  " + aLong);
+                // 0 1 2 3
+            }
+        });
+        //      2)判断条件也可以是Observable
+        Observable.interval(1, TimeUnit.SECONDS)
+                // 第2个Observable：延迟5s后开始发送1个Long型数据
+                .takeUntil(Observable.timer(5, TimeUnit.SECONDS))
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "条件/布尔操作符：takeUntil(2):  " + aLong);
+                        // 0 1 2 3 4
+                    }
+                });
+
+    }
+
+    /**
+     * 条件/布尔操作符：
+     * skipWhile() 判断发送的每项数据是否满足 设置函数条件,直到该判断条件 = false时，才开始发送Observable的数据
+     * skipUntil() 等到 skipUntil（） 传入的Observable开始发送数据，（原始）第1个Observable的数据才开始发送数据
+     * sequenceEqual() 判定两个Observables需要发送的数据是否相同,若相同，返回 true；否则，返回 false
+     */
+    private void skipWhileSkipUntilSequenceEqualDemo() {
+        // 1.skipWhile()
+        // 每隔1s发送1个数据 = 从0开始，每次递增1
+        Observable.interval(1,TimeUnit.SECONDS)
+                // 2. 通过skipWhile（）设置判断条件
+                .skipWhile(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return aLong < 5;
+                        // 直到判断条件不成立 = false = 发射的数据≥5，才开始发送数据
+                    }
+                }).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Log.e(TAG, "条件/布尔操作符：skipWhile(): " + aLong);
+                // 5 6 7 8 9 ...
+            }
+        });
+
+        // 2.skipUntil()
+        // （原始）第1个Observable：每隔1s发送1个数据 = 从0开始，每次递增1
+        Observable.interval(1,TimeUnit.SECONDS)
+                // 第2个Observable：延迟5s后开始发送1个Long型数据
+                .skipUntil(Observable.timer(5,TimeUnit.SECONDS))
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "条件/布尔操作符：skipUntil(): " + aLong);
+                        // 4 5 6 7 8 9 ...
+                        // todo 第5s开始发送，从4开始算起
+                    }
+                });
+
+        // 3.sequenceEqual()
+        Observable.sequenceEqual(
+                Observable.just(1,2,3),
+                Observable.just(1,2,3)
+        ).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                Log.e(TAG, "条件/布尔操作符：sequenceEqual(): 2个Observable是否相同--" + aBoolean);
+                // true
+            }
+        });
+
+    }
+
+    /**
+     * 条件/布尔操作符：
+     * contains() 判断发送的数据中是否包含指定数据 若包含，返回 true；否则，返回 false	内部实现 = exists（）
+     * isEmpty() 判断发送的数据是否为空 若为空，返回 true；否则，返回 false
+     * amb() 当需要发送多个 Observable时，只发送 先发送数据的Observable的数据，而其余 Observable则被丢弃。
+     * defaultIfEmpty() 在不发送任何有效事件（ Next事件）、仅发送了 Complete 事件的前提下，发送一个默认值
+     */
+    private void containsIsEmptyAmbDefaultIfEmptyDemo() {
+        // 1.contains()
+        Observable.just(1,2,3,4,5,6)
+                .contains(4)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        Log.e(TAG, "条件/布尔操作符: contains(): " + aBoolean);
+                        // true
+                    }
+                });
+
+        // 2.isEmpty()
+        Observable.just(1,2,3,4,5,6)
+                .isEmpty()
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        Log.e(TAG, "条件/布尔操作符: isEmpty(): " + aBoolean);
+                        // false
+                    }
+                });
+
+        // 3.amb()
+        // 设置2个需要发送的Observable & 放入到集合中
+        List<ObservableSource<Integer>> list = new ArrayList<>();
+        // 第1个Observable延迟1秒发射数据
+        list.add(Observable.just(1, 2, 3).delay(1, TimeUnit.SECONDS));
+        // 第2个Observable正常发送数据
+        list.add(Observable.just(4, 5, 6));
+
+        // 一共需要发送2个Observable的数据
+        // 但由于使用了amb(),所以仅发送先发送数据的Observable
+        // 即第二个（因为第1个延时了）
+        Observable.amb(list).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.e(TAG, "条件/布尔操作符: amb(): " + integer);
+                // 4 5 6
+            }
+        });
+
+        // 4.defaultIfEmpty()
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                // 不发送任何有效事件
+                //  e.onNext(1);
+                //  e.onNext(2);
+
+                // 仅发送Complete事件
+                emitter.onComplete();
+            }
+        }).defaultIfEmpty(10)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "条件/布尔操作符: defaultIfEmpty():onSubscribe: ");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.e(TAG, "条件/布尔操作符: defaultIfEmpty():onNext: " + integer);
+                        // 10
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "条件/布尔操作符: defaultIfEmpty():onError: " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "条件/布尔操作符: defaultIfEmpty():onComplete: ");
+                    }
+                });
+
+    }
+
+    /**
+     * 背压策略
+     */
+    private void backPressureStrategy() {
 
     }
 
