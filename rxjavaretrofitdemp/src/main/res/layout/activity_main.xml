@@ -526,10 +526,31 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
-            android:text="背压策略"
+            android:text="背压策略：Flowable的基础使用"
             android:textAllCaps="false"
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/btn47" />
+
+        <Button
+            android:id="@+id/btn49"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="背压策略：极限情况代码演示"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn48" />
+
+        <Button
+            android:id="@+id/btn50"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="背压策略：同步订阅"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/btn49" />
+
 
     </android.support.constraint.ConstraintLayout>
 
