@@ -11,7 +11,7 @@
         <Button
             android:id="@+id/btn1"
             style="@style/myButtonStyle"
-            android:text="实际用例：无限轮询"/>
+            android:text="实际用例：无限轮询" />
 
         <Button
             android:id="@+id/btn2"
@@ -337,14 +337,69 @@
         <Button
             android:id="@+id/btn49"
             style="@style/myButtonStyle"
-            android:text="背压策略：极限情况代码演示"
+            android:text="背压策略：代码演示1:观察者不接收事件的情况下，被观察者继续发送事件 存放到缓存区；再按需取出"
             app:layout_constraintTop_toBottomOf="@+id/btn48" />
 
         <Button
             android:id="@+id/btn50"
             style="@style/myButtonStyle"
-            android:text="背压策略：同步订阅"
+            android:text="背压策略：代码演示2:观察者不接收事件的情况下，被观察者继续发送事件至超出缓存区大小（128）"
             app:layout_constraintTop_toBottomOf="@+id/btn49" />
+
+        <Button
+            android:id="@+id/btn51"
+            style="@style/myButtonStyle"
+            android:text="背压策略：同步订阅问题举例"
+            app:layout_constraintTop_toBottomOf="@+id/btn50" />
+
+        <Button
+            android:id="@+id/btn52"
+            style="@style/myButtonStyle"
+            android:text="背压策略：同步订阅：控制被观察者发送事件的速度"
+            app:layout_constraintTop_toBottomOf="@+id/btn51" />
+
+        <Button
+            android:id="@+id/btn53"
+            style="@style/myButtonStyle"
+            android:text="背压策略：同步订阅：控制被观察者发送事件的速度: 特性1：可叠加性"
+            app:layout_constraintTop_toBottomOf="@+id/btn52" />
+
+        <Button
+            android:id="@+id/btn54"
+            style="@style/myButtonStyle"
+            android:text="背压策略：同步订阅：控制被观察者发送事件的速度: 特性2：实时更新性"
+            app:layout_constraintTop_toBottomOf="@+id/btn53" />
+
+        <Button
+            android:id="@+id/btn55"
+            style="@style/myButtonStyle"
+            android:text="背压策略：同步订阅：控制被观察者发送事件的速度: 特性3：异常"
+            app:layout_constraintTop_toBottomOf="@+id/btn54" />
+
+        <Button
+            android:id="@+id/btn56"
+            style="@style/myButtonStyle"
+            android:text="背压策略：异步订阅问题举例"
+            app:layout_constraintTop_toBottomOf="@+id/btn55" />
+
+        <Button
+            android:id="@+id/btn57"
+            style="@style/myButtonStyle"
+            android:text="背压策略：异步订阅逻辑演示"
+            app:layout_constraintTop_toBottomOf="@+id/btn56" />
+
+        <Button
+            android:id="@+id/btn58"
+            style="@style/myButtonStyle"
+            android:text="背压策略：背压模式介绍(自动创建)"
+            app:layout_constraintTop_toBottomOf="@+id/btn57" />
+
+        <Button
+            android:id="@+id/btn59"
+            style="@style/myButtonStyle"
+            android:text="背压策略：背压模式介绍(手动创建)"
+            app:layout_constraintTop_toBottomOf="@+id/btn58" />
+
 
     </android.support.constraint.ConstraintLayout>
 

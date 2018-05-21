@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14,
             btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25, btn26, btn27,
             btn28, btn29, btn30, btn31, btn32, btn33, btn34, btn35, btn36, btn37, btn38, btn39, btn40,
-            btn41, btn42, btn43, btn44, btn45, btn46, btn47, btn48;
+            btn41, btn42, btn43, btn44, btn45, btn46, btn47, btn48, btn49, btn50, btn51, btn52,
+            btn53, btn54, btn55, btn56, btn57, btn58, btn59;
+
     EditText etName, etAge, etJob, etSearch;
     TextView tvSearch;
 
@@ -113,6 +115,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn46 = findViewById(R.id.btn46);
         btn47 = findViewById(R.id.btn47);
         btn48 = findViewById(R.id.btn48);
+        btn49 = findViewById(R.id.btn49);
+        btn50 = findViewById(R.id.btn50);
+        btn51 = findViewById(R.id.btn51);
+        btn52 = findViewById(R.id.btn52);
+        btn53 = findViewById(R.id.btn53);
+        btn54 = findViewById(R.id.btn54);
+        btn55 = findViewById(R.id.btn55);
+        btn56 = findViewById(R.id.btn56);
+        btn57 = findViewById(R.id.btn57);
+        btn58 = findViewById(R.id.btn58);
+        btn59 = findViewById(R.id.btn59);
 
         etName = findViewById(R.id.etName);
         etAge = findViewById(R.id.etAge);
@@ -169,6 +182,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn46.setOnClickListener(this);
         btn47.setOnClickListener(this);
         btn48.setOnClickListener(this);
+        btn49.setOnClickListener(this);
+        btn50.setOnClickListener(this);
+        btn51.setOnClickListener(this);
+        btn52.setOnClickListener(this);
+        btn53.setOnClickListener(this);
+        btn54.setOnClickListener(this);
+        btn55.setOnClickListener(this);
+        btn56.setOnClickListener(this);
+        btn57.setOnClickListener(this);
+        btn58.setOnClickListener(this);
+        btn59.setOnClickListener(this);
 
         // 联合条件判断 可否点击按钮
         jointJudgment();
@@ -178,6 +202,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // debounce()联合搜索优化
         searchOptimization();
+
+        // 代码演示1:初始化必要的被观察者 & 观察者
+        initDemonstation1();
+
+        // 异步订阅逻辑演示 数据初始化
+        initAsynchronousSubscriptionLogic();
 
 //        JSONObject jsonObject = new JSONObject();
 //        JSONObject quotesObj = new JSONObject();
@@ -342,6 +372,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn48:
                 basicUseOfFlowable();
+                break;
+            case R.id.btn49:
+                codeDemonstation1();
+                break;
+            case R.id.btn50:
+                codeDemonstation2();
+                break;
+            case R.id.btn51:
+                synchronizeSubscription();
+                break;
+            case R.id.btn52:
+                synchronizeControlSpeed();
+                break;
+            case R.id.btn53:
+                synchronizeControlSpeedFeature1();
+                break;
+            case R.id.btn54:
+                synchronizeControlSpeedFeature2();
+                break;
+            case R.id.btn55:
+                synchronizeControlSpeedFeature3();
+                break;
+            case R.id.btn56:
+                asynchronousSubscription();
+                break;
+            case R.id.btn57:
+                asynchronousSubscriptionLogic.request(48);
+                // 点击按钮 则 接收48个事件
+                break;
+            case R.id.btn58:
+                backPressureMode();
+                break;
+            case R.id.btn59:
+                backPressureMode2();
                 break;
             default:
                 break;
@@ -3298,10 +3362,108 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * 代码演示1：观察者不接收事件的情况下，被观察者继续发送事件 & 存放到缓存区；再按需取出
-     * 代码演示2：观察者不接收事件的情况下，被观察者继续发送事件至超出缓存区大小（128）
+     * 步骤1：设置变量
      */
-    private void codeDemonstation() {
+    private Subscription mSubscription;
+
+    /**
+     * 代码演示1:观察者不接收事件的情况下，被观察者继续发送事件 存放到缓存区；再按需取出
+     */
+    private void codeDemonstation1() {
+        /**
+         * 步骤2：设置点击事件 = 调用Subscription.request（long n ）
+         */
+        mSubscription.request(2);
+    }
+
+    /**
+     * 代码演示1:初始化必要的被观察者 & 观察者
+     */
+    private void initDemonstation1() {
+        /**
+         * 步骤3：异步调用
+         */
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                Log.e(TAG, "发送事件 1");
+                emitter.onNext(1);
+                Log.e(TAG, "发送事件 2");
+                emitter.onNext(2);
+                Log.e(TAG, "发送事件 3");
+                emitter.onNext(3);
+                Log.e(TAG, "发送事件 4");
+                emitter.onNext(4);
+                Log.e(TAG, "发送完成");
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.e(TAG, "代码演示1::onSubscribe: ");
+                        mSubscription = s;
+                        // 保存Subscription对象，等待点击按钮时（调用request(2)）观察者再接收事件
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.e(TAG, "代码演示1::onNext: " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.e(TAG, "代码演示1::onError: " + t.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "代码演示1::onComplete: ");
+                    }
+                });
+    }
+
+    /**
+     * 代码演示2:观察者不接收事件的情况下，被观察者继续发送事件至超出缓存区大小（128）
+     */
+    private void codeDemonstation2() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 一共发送129个事件，即超出了缓存区的大小
+                for (int i = 0; i < 129; i++) {
+                    Log.e(TAG, "发送了事件: " + i);
+                    emitter.onNext(i);
+                }
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.e(TAG, "onSubscribe: ");
+                        // 默认不设置可接收事件大小
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.e(TAG, "onNext: " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.e(TAG, "onError: " + t.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete: ");
+                    }
+                });
 
     }
 
@@ -3310,46 +3472,704 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 同步订阅 & 异步订阅 的区别在于：
      * 同步订阅中，被观察者 & 观察者工作于同1线程 同步订阅关系中没有缓存区
      */
-    private void syncSubscription() {
+    private void synchronizeSubscription() {
+        // 被观察者在发送1个事件后，必须等待观察者接收后，才能继续发下1个事件
+        /**
+         * 步骤1：创建被观察者 =  Flowable
+         */
+        Flowable<Integer> flowable = Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 发送3个事件
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: 发送了事件1");
+                emitter.onNext(1);
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: 发送了事件2");
+                emitter.onNext(2);
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: 发送了事件3");
+                emitter.onNext(3);
+
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR);
+
+        /**
+         * 步骤2：创建观察者 =  Subscriber
+         */
+        Subscriber<Integer> subscriber = new Subscriber<Integer>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: onSubscribe");
+                s.request(3);
+                // 每次可接收事件 = 3 二次匹配
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: onNext: " + integer);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: onError: " + t.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "被观察者发送事件数量 = 观察者接收事件数量: onComplete: ");
+            }
+        };
+
+        /**
+         * 步骤3：建立订阅关系
+         */
+        flowable.subscribe(subscriber);
+
+        // 所以，实际上并不会出现被观察者发送事件速度 > 观察者接收事件速度的情况。
+        // 可是，却会出现被观察者发送事件数量 > 观察者接收事件数量的问题。
+        // 如：观察者只能接受3个事件，但被观察者却发送了4个事件，所以出现了不匹配情况
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 被观察者发送事件数量 = 4个
+                Log.d(TAG, "被观察者发送事件数量 > 观察者接收事件数量： 发送了事件1");
+                emitter.onNext(1);
+                Log.d(TAG, "被观察者发送事件数量 > 观察者接收事件数量： 发送了事件2");
+                emitter.onNext(2);
+                Log.d(TAG, "被观察者发送事件数量 > 观察者接收事件数量： 发送了事件3");
+                emitter.onNext(3);
+                Log.d(TAG, "被观察者发送事件数量 > 观察者接收事件数量： 发送了事件4");
+                emitter.onNext(4);
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.e(TAG, "被观察者发送事件数量 > 观察者接收事件数量： onSubscribe: ");
+                        s.request(3);
+                        // 观察者接收事件 = 3个 ，即不匹配
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.e(TAG, "被观察者发送事件数量 > 观察者接收事件数量： onNext: " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.e(TAG, "被观察者发送事件数量 > 观察者接收事件数量： onError: " + t.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "被观察者发送事件数量 > 观察者接收事件数量： onComplete: ");
+                    }
+                });
+
+        // todo 所以，对于没有缓存区概念的同步订阅关系来说，单纯采用控制观察者的接收事件数量（响应式拉取）
+        // todo 实际上就等于 “单相思”，虽然观察者控制了要接收3个事件，但假设被观察者需要发送4个事件，还是会出现问题。
+
+        // 特殊情况：若观察者没有设置Subscription.request(long n),此时被观察者开始发送事件，
+        // 那么观察者将不会收到被观察者发送的任何事件 & 抛出MissingbackpressureException异常
+        // 解释：观察者没有设置Subscription.request(long n),那么被观察者默认观察者没有处理事件能力
+        //      所以观察者发送了1个事件后就不会再发送
+        // 抛出异常原因：被观察者发送1个事件后都会等观察者接收完再继续发送事件
+        //      既然观察者无法接受事件，那么被观察者一直等待会耗费资源，所以会抛异常来提醒观察者接收事件
 
     }
 
     /**
-     * 背压策略
-     * 背景：观察者 & 被观察者 之间存在2种订阅关系：同步 & 异步
-     * 对于异步订阅，存在被观察者发送事件速度与观察者接收事件速度不匹配的情况
-     * 1.发送 & 接收事件速度 = 单位时间内 发送 & 接收事件的数量
-     * 2.大多数情况下，主要是被观察者发送事件速度 > 观察者接收事件速度
-     * 问题：被观察者发送事件速度太快，而观察者来不及接收所有事件，
-     * 从而导致观察者无法及时响应/处理所有发送过来的事件的问题
-     * 最终导致缓存区溢出、事件丢失 & OOM
-     * 1.如，点击按钮事件：连续过快点击10次，则只会造成点击2次的效果
-     * 2.解释：点击的速度太快，按钮来不及响应
-     * 解决方案：背压策略
-     * 定义：一种 控制事件流速 的策略
-     * 作用：在异步订阅关系中，控制事件发送 & 接收的速度
-     * 背压的作用域 = 一步订阅关系，即被观察者 & 观察者处在不同线程中
-     * 解决的问题：解决了 因被观察者发送事件速度 与 观察者接收事件速度 不匹配（一般是前者 快于 后者），
-     * 从而导致观察者无法及时响应 / 处理所有 被观察者发送事件 的问题
-     * 应用场景：被观察者发送事件速度 与 观察者接收事件速度 不匹配的场景
-     * 具体场景就取决于 该事件的类型，如：网络请求，那么具体场景：
-     * 有很多网络请求需要执行，但执行者的执行速度没那么快，此时就需要使用背压策略来进行控制。
-     * 原理：1.避免出现事件发送 & 接收流速不匹配，控制观察者接收速度/被观察者发送速度
-     * 2.对超出缓存区大小的事件进行丢弃、保留、报错的措施
-     * 在 RxJava2.0中，采用 Flowable 实现 背压策略，正确来说，应该是 “非阻塞式背压” 策略
+     * 背压策略：同步订阅：控制被观察者发送事件的速度
+     * 原理：反馈控制
+     * 即被观察者根据观察者的接收事件能力从而控制发送事件速度：
+     * 观察者预先告知被观察者其事件接收能力
+     * 被观察者在发送时间前获知被观察者其事件接收能力 & 调整事件发送速度
+     * 实现方式：FlowableEmitter.requested()
+     * 即通过被观察者中的FlowableEmitter类的requested()方法控制流速
+     * 反向控制被观察者发送事件速度原理：
+     * 同步订阅关系(被观察者 与 观察者 处于同一线程)：
+     * 1.被观察者FlowableEmitter.requested()的返回值 = 观察者Subscription.request(a)中的a
+     * 2.即被观察者通过FlowableEmitter.requested()知道了观察者自身接收事件的能力，从而根据该信息
+     * 控制事件发送速度，从而达到了观察者反向控制被观察者的效果
+     * 异步订阅关系(被观察者 与 观察者 处于不同线程)：
+     * 1.被观察者FlowableEmitter.requested()的返回值 = 被观察者线程中RxJava内部调用的request(n)
+     * 中的n的值(n=128、96、0)
+     * 2.观察者requested()的返回值 = 观察者中的request(a)中的a
+     * 3.由于二者处于不同线程，被关闭差值无法通过FlowableEmitter.requested()指导观察者自身的接收事件能力
+     * 只能通过RxJava内部固定设置 从而反向控制被观察者发送事件速度
      */
-    private void backPressureStrategy() {
-        // 背压策略的使用
-        // 使用背压的场景 = 异步订阅关系，所以下文中讲解的主要是异步订阅关系场景，即 被观察者 & 观察者 工作在不同线程中
-        // 但由于在同步订阅关系的场景也可能出现流速不匹配的问题，所以在讲解异步情况后，会稍微讲解一下同步情况，以方便对比
-        // 面向对象：观察者
-        // 原理：响应式拉取
-        //      观察者根据自身实际情况按需接收事件，
-        //      不管被观察者发送了多少个事件，观察者仅根据自身情况来接收事件
-        //      哪怕被观察者发送100个事件，但若观察者仅需2个事件，则只接收2个事件，忽略另外98个
-        //      虽然观察者是响应式拉取来接收事件，但被观察者发送事件则是一次过发送完毕的
-        // 实现方式：Subscriber.Subscription.request()
-        //      即，通过观察者中的onSubscribe()的Subscription参数的request()方法控制流速
+    private void synchronizeControlSpeed() {
+        // 下面的例子 = 被观察者根据观察者自身接收事件能力（10个事件），从而仅发送10个事件
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 调用emitter.requested()获取当前观察者需要接收的事件数量
+                long n = emitter.requested();
+
+                Log.e(TAG, "观察者可接收事件:subscribe: " + n);
+
+                // 根据emitter.requested()的值，即当前观察者需要接收的事件数量来发送事件
+                for (int i = 0; i < n; i++) {
+                    Log.e(TAG, "同步订阅：控制被观察者发送事件的速度 - 发送了事件: " + i);
+                    emitter.onNext(i);
+                }
+
+            }
+        }, BackpressureStrategy.ERROR).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onSubscribe(Subscription s) {
+                Log.e(TAG, "同步订阅：控制被观察者发送事件的速度 - onSubscribe: ");
+
+                // 设置观察者每次能接受10个事件
+                s.request(10);
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.e(TAG, "同步订阅：控制被观察者发送事件的速度 - onNext: " + integer);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.e(TAG, "同步订阅：控制被观察者发送事件的速度 - onError: " + t.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "同步订阅：控制被观察者发送事件的速度 - onComplete: ");
+            }
+        });
+
+        // todo 同步订阅情况中使用FlowableEmitter.requested():
+        // 1.可叠加性：观察者可连续要求接收事件，被观察者会进行叠加并一起发送
+        // 2.实时更新性：每次发送事件后，FlowableEmitter.requested()的返回值会实时更新观察者能接收的事件
+        // 3.异常：当FlowableEmitter.requested()返回值为0，代表观察者已经不可以接收事件
+        //      此时被观察者若继续发送事件，则会抛出MissingBackpressureException
+        //      额外：若观察者没有设置可接收事件数量，即无调用Subscription.request()
+        //          那么被观察者默认观察者可接收事件数量=0，即FLowableEmitter.requester()返回值为0
+        //          因为同步订阅关系中，不存在缓存区的概念
+    }
+
+    /**
+     * 情况1：可叠加性
+     * 即：观察者可连续要求接收事件，被观察者会进行叠加并一起发送
+     * Subscription.request（a1）；
+     * Subscription.request（a2）；
+     * FlowableEmitter.requested()的返回值 = a1 + a2
+     */
+    private void synchronizeControlSpeedFeature1() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 调用emitter.requested()获取当前观察者需要接收的事件数量
+                Log.e(TAG, "观察者可接收事件: " + emitter.requested());
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.e(TAG, "onSubscribe: ");
+                        s.request(10); // 第1次设置观察者每次能接受10个事件
+                        s.request(20); // 第2次设置观察者每次能接受20个事件
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 情况2：实时更新性
+     * 即，每次发送事件后，emitter.requested()会实时更新观察者能接受的事件
+     * 1.即一开始观察者要接收10个事件，发送了1个后，会实时更新为9个
+     * 2.仅计算Next事件，complete & error事件不算。
+     * <p>
+     * Subscription.request（10）；
+     * // FlowableEmitter.requested()的返回值 = 10
+     * <p>
+     * FlowableEmitter.onNext(1); // 发送了1个事件
+     * // FlowableEmitter.requested()的返回值 = 9
+     */
+    private void synchronizeControlSpeedFeature2() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+
+                // 1. 调用emitter.requested()获取当前观察者需要接收的事件数量
+                Log.e(TAG, "观察者可接收事件数量 = " + emitter.requested());
+
+                // 2. 每次发送事件后，emitter.requested()会实时更新观察者能接受的事件
+                // 即一开始观察者要接收10个事件，发送了1个后，会实时更新为9个
+                Log.e(TAG, "发送了事件 1");
+                emitter.onNext(1);
+                Log.e(TAG, "发送了事件1后, 还需要发送事件数量 = " + emitter.requested());
+
+                Log.e(TAG, "发送了事件 2");
+                emitter.onNext(2);
+                Log.e(TAG, "发送事件2后, 还需要发送事件数量 = " + emitter.requested());
+
+                Log.e(TAG, "发送了事件 3");
+                emitter.onNext(3);
+                Log.e(TAG, "发送事件3后, 还需要发送事件数量 = " + emitter.requested());
+
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.d(TAG, "onSubscribe");
+
+                        s.request(10); // 设置观察者每次能接受10个事件
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "接收到了事件" + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w(TAG, "onError: ", t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+    /**
+     * 情况3：异常
+     * 当FlowableEmitter.requested()减到0时，则代表观察者已经不可接收事件
+     * 此时被观察者若继续发送事件，则会抛出MissingBackpressureException异常
+     * <p>
+     * 如观察者可接收事件数量 = 1，当被观察者发送第2个事件时，就会抛出异常
+     */
+    private void synchronizeControlSpeedFeature3() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+
+                // 1. 调用emitter.requested()获取当前观察者需要接收的事件数量
+                Log.d(TAG, "观察者可接收事件数量 = " + emitter.requested());
+
+                // 2. 每次发送事件后，emitter.requested()会实时更新观察者能接受的事件
+                // 即一开始观察者要接收10个事件，发送了1个后，会实时更新为9个
+                Log.d(TAG, "发送了事件 1");
+                emitter.onNext(1);
+                Log.d(TAG, "发送了事件1后, 还需要发送事件数量 = " + emitter.requested());
+
+                Log.d(TAG, "发送了事件 2");
+                emitter.onNext(2);
+                Log.d(TAG, "发送事件2后, 还需要发送事件数量 = " + emitter.requested());
+
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+
+                        Log.d(TAG, "onSubscribe");
+                        s.request(1); // 设置观察者每次能接受1个事件
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "接收到了事件" + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w(TAG, "onError: ", t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+    /**
+     * 背压策略：异步订阅问题举例
+     * 由于二者处于不同线程，所以被观察者 无法通过 FlowableEmitter.requested()知道观察者自身接收事件能力，
+     * 即 被观察者不能根据 观察者自身接收事件的能力 控制发送事件的速度。具体请看下面例子
+     */
+    private void asynchronousSubscription() {
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+                // 调用emitter.requested()获取当前观察者需要接收的事件数量
+                Log.e(TAG, "观察者可接收事件数量 = " + emitter.requested());
+                // 128
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.e(TAG, "onSubscribe: ");
+                        s.request(150);
+                        // 该设置仅影响观察者线程中的requested，却不会影响的被观察者中的FlowableEmitter.requested()的返回值
+                        // 因为FlowableEmitter.requested()的返回值 取决于RxJava内部调用request(n)，
+                        // 而该内部调用会在一开始就调用request(128)
+                        // 为什么是调用request(128)下面再讲解
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        // 在异步订阅关系中，反向控制的原理是：通过RxJava内部固定调用被观察者线程中的request(n)
+        // 从而 反向控制被观察者的发送事件速度
+        // 至于为什么是调用request（128） & request（96） & request（0），感兴趣的读者可自己阅读 Flowable的源码
+    }
+
+    /**
+     * 背压策略：异步订阅逻辑演示
+     */
+    private Subscription asynchronousSubscriptionLogic;
+
+    private void initAsynchronousSubscriptionLogic() {
+        // 被观察者：一共需要发送500个事件，但真正开始发送事件的前提 = FlowableEmitter.requested()返回值 ≠ 0
+        // 观察者：每次接收事件数量 = 48（点击按钮）
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+
+                Log.d(TAG, "观察者可接收事件数量 = " + emitter.requested());
+                boolean flag; //设置标记位控制
+
+                // 被观察者一共需要发送500个事件
+                for (int i = 0; i < 500; i++) {
+                    flag = false;
+
+                    // 若requested() == 0则不发送
+                    while (emitter.requested() == 0) {
+                        if (!flag) {
+                            Log.d(TAG, "不再发送");
+                            flag = true;
+                        }
+                    }
+                    // requested() ≠ 0 才发送
+                    Log.d(TAG, "发送了事件" + i + "，观察者可接收事件数量 = " + emitter.requested());
+                    emitter.onNext(i);
+
+
+                }
+            }
+        }, BackpressureStrategy.ERROR).subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.d(TAG, "onSubscribe");
+                        asynchronousSubscriptionLogic = s;
+                        // 初始状态 = 不接收事件；通过点击按钮接收事件
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "接收到了事件" + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w(TAG, "onError: ", t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+    }
+
+    /**
+     * 背压策略：背压模式介绍(自动创建)
+     */
+    private void backPressureMode() {
+        // 需要解决的问题：流水不匹配，发送事件速度 > 接收事件速度
+        //      具体表现：当缓存区大小存满(默认128)，被观察者仍然继续发送下1个事件
+        // 解决方案：
+        //      1.手动创建Flowable
+        //          1)BackpressureStrategy.ERROR,直接抛出异常MissingBackpressureException
+        //          2)backpressureStrategy.MISSING，友好提示，缓存区满了
+        //          3)BackpressureStrategy.BUFFER,将缓存区设置成无限大，即被观察者可无限发送事件
+        //              观察者实际上是存放在缓存区，注意内存，防止OOM
+        //          4)BackpressureStrategy.DROP,超过缓存区128的事件丢弃
+        //          5)BackpressureStrategy.LATEST，值保存最新(最后)事件，超过缓存区的丢弃
+        //      2.自动创建Flowable
+        //          1)onBackpressureBuffer()
+        //          2)onBackpressureDrop()
+        //          3)onBackpressureLatest()
+        //          4)默认才用BackpressureStrategy.ERROR
+        //          todo 作用通模式参数
+
+        // 出现当缓存区大小存满（默认缓存区大小 = 128）、被观察者仍然继续发送下1个事件时
+        // 1.BackpressureStrategy.ERROR
+        // MissingBackpressureException: create: could not emit value due to lack of requests
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+
+                // 发送 129个事件
+                for (int i = 0;i< 129; i++) {
+                    Log.d(TAG, "发送了事件" + i);
+                    emitter.onNext(i);
+                }
+                emitter.onComplete();
+            }
+        }, BackpressureStrategy.ERROR) // 设置背压模式 = BackpressureStrategy.ERROR
+                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.d(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "接收到了事件" + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w(TAG, "onError: ", t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
+
+        // 2.BackpressureStrategy.MISSING 友好提示：缓存区满了
+        // MissingBackpressureException: Queue is full?!
+//        Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//
+//                // 发送 129个事件
+//                for (int i = 0;i< 129; i++) {
+//                    Log.d(TAG, "发送了事件" + i);
+//                    emitter.onNext(i);
+//                }
+//                emitter.onComplete();
+//            }
+//        }, BackpressureStrategy.MISSING) // 设置背压模式 = BackpressureStrategy.MISSING
+//                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+//                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+//                .subscribe(new Subscriber<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        Log.d(TAG, "onSubscribe");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//                        Log.d(TAG, "接收到了事件" + integer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        Log.w(TAG, "onError: ", t);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Log.d(TAG, "onComplete");
+//                    }
+//                });
+
+        // 3.BackpressureStrategy.BUFFER 将缓存区大小设置成无限大
+        // 被观察者可无限发送事件 观察者，但实际上是存放在缓存区 要注意内存情况，防止出现OOM
+//        Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//
+//                // 发送 129个事件
+//                for (int i = 1;i< 130; i++) {
+//                    Log.d(TAG, "发送了事件" + i);
+//                    emitter.onNext(i);
+//                }
+//                emitter.onComplete();
+//            }
+//        }, BackpressureStrategy.BUFFER) // 设置背压模式 = BackpressureStrategy.BUFFER
+//                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+//                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+//                .subscribe(new Subscriber<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        Log.d(TAG, "onSubscribe");
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//                        Log.d(TAG, "接收到了事件" + integer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        Log.w(TAG, "onError: ", t);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Log.d(TAG, "onComplete");
+//                    }
+//                });
+        // 可以接收超过原先缓存区大小（128）的事件数量了
+
+
+        // todo 以下两个demo BackpressureStrategy.DROP BackpressureStrategy.LATEST
+        // todo 在一个点击事件里面没有测出来，应该初始化数据，然后点击按钮的时候调用 s.request(128);
+
+        // 4. BackpressureStrategy.DROP 超过缓存区大小（128）的事件丢弃
+        // 如发送了150个事件，仅保存第1 - 第128个事件，第129 -第150事件将被丢弃
+//        Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//                // 发送150个事件
+//                for (int i = 0;i< 150; i++) {
+//                    Log.d(TAG, "发送了事件" + i);
+//                    emitter.onNext(i);
+//                }
+//                emitter.onComplete();
+//            }
+//        }, BackpressureStrategy.DROP)      // 设置背压模式 = BackpressureStrategy.DROP
+//                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+//                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+//                .subscribe(new Subscriber<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        Log.d(TAG, "onSubscribe");
+//                        s.request(128);
+//                        // 通过按钮进行接收事件
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//                        Log.d(TAG, "接收到了事件" + integer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        Log.w(TAG, "onError: ", t);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Log.d(TAG, "onComplete");
+//                    }
+//                });
+
+        // 5.BackpressureStrategy.LATEST 只保存最新（最后）事件，超过缓存区大小（128）的事件丢弃
+        // 即如果发送了150个事件，缓存区里会保存129个事件（第1-第128 + 第150事件）
+        // todo 1.被观察者一下子发送了150个事件，点击按钮接收时观察者接收了128个事件；
+        // todo 2.再次点击接收时却接收到1个事件（第150个事件），这说明超过缓存区大小的事件仅保留最后的事件（第150个事件）
+//        Flowable.create(new FlowableOnSubscribe<Integer>() {
+//            @Override
+//            public void subscribe(FlowableEmitter<Integer> emitter) throws Exception {
+//                for (int i = 0;i< 150; i++) {
+//                    Log.d(TAG, "发送了事件" + i);
+//                    emitter.onNext(i);
+//                }
+//                emitter.onComplete();
+//            }
+//        }, BackpressureStrategy.LATEST) // // 设置背压模式 = BackpressureStrategy.LATEST
+//                .subscribeOn(Schedulers.io()) // 设置被观察者在io线程中进行
+//                .observeOn(AndroidSchedulers.mainThread()) // 设置观察者在主线程中进行
+//                .subscribe(new Subscriber<Integer>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        Log.d(TAG, "onSubscribe");
+//                        s.request(128);
+//                        // 通过按钮进行接收事件
+//                    }
+//
+//                    @Override
+//                    public void onNext(Integer integer) {
+//                        Log.d(TAG, "接收到了事件" + integer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//                        Log.w(TAG, "onError: ", t);
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        Log.d(TAG, "onComplete");
+//                    }
+//                });
+
+    }
+
+    /**
+     * 背压策略：背压模式介绍(手动创建)
+     */
+    private void backPressureMode2(){
+        Flowable.interval(1, TimeUnit.MILLISECONDS)
+                .onBackpressureBuffer() // 添加背压策略封装好的方法，此处选择Buffer模式，即缓存区大小无限制
+                .observeOn(Schedulers.newThread())
+                .subscribe(new Subscriber<Long>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        Log.d(TAG, "onSubscribe");
+                        mSubscription = s;
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        Log.d(TAG, "onNext: " + aLong);
+                        try {
+                            Thread.sleep(1000);
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.w(TAG, "onError: ", t);
+                    }
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
     }
 
 }
