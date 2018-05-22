@@ -830,7 +830,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 emitter.onNext(1);
                 emitter.onNext(2);
                 emitter.onNext(3);
-                // 发送Error事件，因为使用concatDelayError，所以第2个Observable将不会发送事件
+                // 发送Error事件，因为使用concatDelayError，所以第2个Observable将会发送事件
                 emitter.onError(new NullPointerException());
                 emitter.onComplete();
             }
@@ -940,7 +940,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        // 2个被观察者：最后不发送onComplete()：事件尽管被观察者2的事件D没有事件与其合并，但还是会继续发送
+        // 2个被观察者：最后不发送onComplete()：尽管被观察者2的事件D没有事件与其合并，但还是会继续发送
         // 若在被观察者1 & 被观察者2的事件序列最后发送onComplete()事件，则被观察者2的事件D也不会发送
 
     }
@@ -3179,6 +3179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete() {
                         Log.e(TAG, "条件/布尔操作符: defaultIfEmpty():onComplete: ");
                     }
+
                 });
 
     }
@@ -3349,6 +3350,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete() {
                         Log.e(TAG, "onComplete: ");
                     }
+
                 });
 
         // 结论：对于异步订阅情况(2者工作在不同线程)，若观察者没有设置Subscription.request(long n),说明观察者不接受事件
