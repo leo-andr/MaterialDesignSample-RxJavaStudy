@@ -4,4 +4,4 @@
 3.databingding
 4.toolbar
 5.转场动画基础使用
-6.各种侧滑退出页面 [侧滑](https://github.com/liuguangqiang/SwipeBack"{:target="_blank"}
+6.各种侧滑退出页面 [侧滑](https://github.com/liuguangqiang/SwipeBack"
