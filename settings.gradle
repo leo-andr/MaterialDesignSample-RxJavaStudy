@@ -1,1 +1,1 @@
-include ':app', ':headstretchablelistview', ':toolbardemo', ':databindingdemo', ':rxjavaretrofitdemp'
+include ':app', ':headstretchablelistview', ':toolbardemo', ':databindingdemo', ':rxjavaretrofitdemp', ':transition_animation'

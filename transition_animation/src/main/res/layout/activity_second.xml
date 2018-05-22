@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@mipmap/timg2"
+            android:scaleType="fitXY"
+            android:transitionName="myImage"
+            android:onClick="finish"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="解锁羁绊，携手同行"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:transitionName="myText"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="网易和风匠心巨制《阴阳师》手游在4月7日维护后迎来了全新亲友系统——好友羁绊。全新亲友系统的上线使《阴阳师》的玩家交互系统日趋完善，使玩家之间的互动可视化，为玩家加深友情提供了新平台。在亲友系统中，玩家之间达到一定羁绊值将解锁亲友关系，享受组队加成、赠送友情点双倍、上线提醒等福利。解锁羁绊，携手同行，《阴阳师》亲友系统让玩家们更好地与好友共享成长喜悦，分享精彩时刻。
+【平安世界 携手同行】
+距离4月7日全新亲友系统上线已经过去了十天，相信许多玩家已经与自己的好友解锁羁绊，共享亲友福利与成长的精彩时刻。
+在最新的亲友系统中，玩家与好友/寮友组队挑战副本即可获得羁绊值，达到一定羁绊的好友将解锁亲友关系，享受组队加成、赠送友情点双倍、上线提醒等福利。好友福袋重新上架商店，各位玩家之间可以通过好友列表界面互赠好友福袋，收取方获得寮办准备的神秘礼物，且双方均能获得羁绊值加成。
+“亲友系统”带给玩家们的另一重惊喜便是式神协战，达成亲友关系的玩家可以使用亲友的式神进行剧情、探索、御魂、觉醒、秘闻副本(除十层)、妖气封印等，玩家可在协助亲友页面指定位置放置援护式神，自己的式神被亲友使用还会获得奖励。
+【平安式神 亲友羁绊】
+平安京的百位式神中也不乏羁绊颇深的亲友，有着许多光怪陆离又颇为动人的故事。
+在烟烟罗登场后，许多玩家发现了她与一位式神有着相似之处，随着传记的解锁，大家发现原来烟烟罗与食发鬼是一对姐弟。高冷御姐烟烟罗与爱美的食发鬼，这对姐弟之间的亲情十分有趣。烟烟罗对弟弟关爱备至，得知弟弟在与晴明的对战中失败前来探望，嘴上却说着来看看弟弟被欺负的样子;而食发鬼对姐姐的口是心非了然于心，姐弟之间相互斗嘴，满满的都是亲情。
+雀与犬神的友情故事为玩家所熟知，在犬神还是崇尚暴力的恶犬时，雀来到了他的身边，教会了他信任，带给了他友情的关怀，让犬神成为了正义的拥护者。在雀意外地失去生命后，晴明将它变成了犬神的守护灵，让这段友情得以延续。
+提到平安京的友情，不得不提的就是茨木童子与酒吞童子这对挚友。茨木十分想念与酒吞一起在树林里喝酒谈天的日子，在酒吞因情伤而不知所踪后一路寻找到了平安京，在晴明等人的帮助下找到了烂醉的酒吞，在酒吞最潦倒的时刻茨木一直守护着他。茨木与酒吞是实力旗鼓相当的挚友，彼此了解对方的骄傲，也愿意承担对方的痛楚，这样的他们，在平安世界携手同行，一同成长。
+【玩家交互日趋完善】
+自《阴阳师》上线以来，一直不断更新完善玩家交互系统，推出了“互赠友情点”“协同斗技”等游戏内容。亲友系统的上线，让《阴阳师》的社交互动性得到了很大提升，玩家在游戏中与好友的互动方式更加多样。《阴阳师》正在不断努力丰富玩家的游戏内容，也期待玩家通过游戏与志同道合的朋友相识相遇，共同为平安世界的和平奉献力量。"/>
+
+    </LinearLayout>
+
+
+</ScrollView>

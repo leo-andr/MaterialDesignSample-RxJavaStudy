@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" filepath="$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" filepath="$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" />
       <module fileurl="file://$PROJECT_DIR$/toolbardemo/toolbardemo.iml" filepath="$PROJECT_DIR$/toolbardemo/toolbardemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transition_animation/transition_animation.iml" filepath="$PROJECT_DIR$/transition_animation/transition_animation.iml" />
     </modules>
   </component>
 </project>

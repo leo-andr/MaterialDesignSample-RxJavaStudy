@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/headstretchablelistview" />
             <option value="$PROJECT_DIR$/rxjavaretrofitdemp" />
             <option value="$PROJECT_DIR$/toolbardemo" />
+            <option value="$PROJECT_DIR$/transition_animation" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
