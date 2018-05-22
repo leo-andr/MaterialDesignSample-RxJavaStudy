@@ -81,9 +81,9 @@ public class MyListView extends ListView {
     }
 
     class ResetAnimotion extends Animation {
-        private int targhtHeight;
-        private int originHeight;
-        private int extraHeight;
+        private int targhtHeight; // 目前imageView高度
+        private int originHeight; // 本身高度
+        private int extraHeight; // 差值
 
         private ResetAnimotion(ImageView iv, int targhtHeight) {
             this.targhtHeight = targhtHeight;
