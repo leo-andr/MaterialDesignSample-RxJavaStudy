@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/databindingdemo/databindingdemo.iml" filepath="$PROJECT_DIR$/databindingdemo/databindingdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" filepath="$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/material-animations/material-animations.iml" filepath="$PROJECT_DIR$/material-animations/material-animations.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" filepath="$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipe_back_demo/swipe_back_demo.iml" filepath="$PROJECT_DIR$/swipe_back_demo/swipe_back_demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/toolbardemo/toolbardemo.iml" filepath="$PROJECT_DIR$/toolbardemo/toolbardemo.iml" />

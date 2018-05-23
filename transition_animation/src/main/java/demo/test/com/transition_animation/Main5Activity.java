@@ -53,6 +53,7 @@ public class Main5Activity extends AppCompatActivity {
             Explode explode = new Explode(); // 展开回收
             explode.setDuration(500);
 
+
 //            getWindow().setEnterTransition(fade); // 当A start B时，使B中的View进入场景的transition
             getWindow().setExitTransition(explode); // 当A start B时，使A中的View退出场景的transition
 //            getWindow().setReturnTransition(slide); // 当B 返回 A时，使B中的View退出场景的transition

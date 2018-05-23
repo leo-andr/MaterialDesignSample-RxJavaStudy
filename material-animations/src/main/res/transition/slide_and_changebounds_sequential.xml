@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@integer/anim_duration_long"
+    android:transitionOrdering="sequential">
+    // sequential顺序执行或者together同时执行
+    <slide />
+    <changeBounds />
+</transitionSet>
