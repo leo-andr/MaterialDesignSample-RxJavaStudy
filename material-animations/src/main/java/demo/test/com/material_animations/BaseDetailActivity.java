@@ -19,7 +19,9 @@ public class BaseDetailActivity extends AppCompatActivity {
     void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        // toolbar是否加上返回图标 默认不加
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // 显示标题和子标题 默认显示
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 

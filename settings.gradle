@@ -1,1 +1,1 @@
-include ':app', ':headstretchablelistview', ':toolbardemo', ':databindingdemo', ':rxjavaretrofitdemp', ':transition_animation', ':swipe_back_demo', ':material-animations'
+include ':app', ':headstretchablelistview', ':toolbardemo', ':databindingdemo', ':rxjavaretrofitdemp', ':transition_animation', ':swipe_back_demo', ':material-animations', ':gallery_recyclerview'
