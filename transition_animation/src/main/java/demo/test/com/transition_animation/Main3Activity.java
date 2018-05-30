@@ -16,7 +16,7 @@ import android.widget.ImageView;
 /**
  * @author lipiao
  * @data 2018/5/22.
- * @description 描述
+ * @description
  */
 public class Main3Activity extends AppCompatActivity {
 
