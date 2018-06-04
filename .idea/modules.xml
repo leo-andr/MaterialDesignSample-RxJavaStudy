@@ -8,9 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/gallery_recyclerview/gallery_recyclerview.iml" filepath="$PROJECT_DIR$/gallery_recyclerview/gallery_recyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" filepath="$PROJECT_DIR$/headstretchablelistview/headstretchablelistview.iml" />
       <module fileurl="file://$PROJECT_DIR$/material-animations/material-animations.iml" filepath="$PROJECT_DIR$/material-animations/material-animations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/material_design_demo/material_design_demo.iml" filepath="$PROJECT_DIR$/material_design_demo/material_design_demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" filepath="$PROJECT_DIR$/rxjavaretrofitdemp/rxjavaretrofitdemp.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipe_back_demo/swipe_back_demo.iml" filepath="$PROJECT_DIR$/swipe_back_demo/swipe_back_demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/toolbardemo/toolbardemo.iml" filepath="$PROJECT_DIR$/toolbardemo/toolbardemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/transition_animation/transition_animation.iml" filepath="$PROJECT_DIR$/transition_animation/transition_animation.iml" />
     </modules>
   </component>
