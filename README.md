@@ -1,5 +1,5 @@
-# RxJavaStudyDemo
-- RxJava学习
+# Android部分学习清单
+- RxJava+retrofit学习
 - 自定义可拉伸头部listView
 - databingding
 - 转场动画基础使用
