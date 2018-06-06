@@ -10,12 +10,39 @@
 
 
     <!-- Behavior -->
-    <string name="cover_header_behavior" translatable="false">me.lipiao.material_design.behavoir.CoverHeaderScrollBehavior</string>
+    <!-- 仿开眼首页效果 -->
+    <string name="cover_header_behavior" translatable="false">me.lipiao.material_design.behavoir.kaiyan.CoverHeaderScrollBehavior</string>
 
-    <string name="floating_title_behavoir">me.lipiao.material_design.behavoir.FloatingHeaderTitleBehavior</string>
-    <string name="content_behavior" translatable="false">me.lipiao.material_design.behavoir.HeaderScrollBehavior</string>
+    <!-- EditText缩放到顶部 -->
+    <string name="floating_title_behavoir">me.lipiao.material_design.behavoir.edittext_scroll.FloatingHeaderTitleBehavior</string>
+    <string name="content_behavior" translatable="false">me.lipiao.material_design.behavoir.edittext_scroll.HeaderScrollBehavior</string>
 
+    <!-- 知乎首页底部导航栏效果 -->
+    <string name="zhihu_footer_behavior1" translatable="false">me.lipiao.material_design.behavoir.zhihu.ZhihuFooterBehavior1</string>
+    <!-- 这个还有点问题 -->
+    <string name="zhihu_footer_behavior2" translatable="false">me.lipiao.material_design.behavoir.zhihu.ZhihuFooterBehavior2</string>
 
+    <!-- FloatingActionButton的显示与隐藏 -->
+    <!-- 1.缩放模式 -->
+    <string name="fab_scale_behavior" translatable="false">me.lipiao.material_design.behavoir.fab.FabScaleBehavior</string>
+    <!-- 2.位移模式 -->
+    <string name="fab_translation_behavior" translatable="false">me.lipiao.material_design.behavoir.fab.FabTranslationBehavior</string>
+
+    <!-- uc浏览器主页 -->
+    <!-- sample1 -->
+    <string name="uc_browser_sample_title_behavior" translatable="false">me.lipiao.material_design.behavoir.uc.sample1.UcSampleTitleBehavior</string>
+    <!-- sample2 -->
+    <string name="uc_browser_sample_title_behavior2" translatable="false">me.lipiao.material_design.behavoir.uc.sample2.UcSampleTitleBehavior2</string>
+    <string name="uc_browser_sample_recyclerview_behavior" translatable="false">me.lipiao.material_design.behavoir.uc.sample2.UcRecyclerViewBehavior</string>
+    <!-- main page -->
+    <string name="behavior_main_content">me.lipiao.material_design.behavoir.uc.mainpage.MainContentBehavior</string>
+    <string name="behavior_main_header">me.lipiao.material_design.behavoir.uc.mainpage.MainHeaderBehavior</string>
+    <string name="behavior_main_title">me.lipiao.material_design.behavoir.uc.mainpage.MainTitleBehavior</string>
+    <string name="behavior_main_tab">me.lipiao.material_design.behavoir.uc.mainpage.MainTabBehavior</string>
+
+    <!-- 虾米音乐主页 -->
+    <string name="behavior_xiami_comment">me.lipiao.material_design.behavoir.xiami.XiamiCommentBehavior</string>
+    <string name="behavior_xiami_title">me.lipiao.material_design.behavoir.xiami.XiamiTitleBehavior</string>
 
     <string name="js_comment">%1$d 次阅.%2$d 评论.%3$d 喜欢.%4$d 打赏</string>
     <string name="large_text">

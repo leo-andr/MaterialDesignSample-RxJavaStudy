@@ -1,4 +1,4 @@
-package me.lipiao.material_design.behavoir;
+package me.lipiao.material_design.behavoir.fab;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;

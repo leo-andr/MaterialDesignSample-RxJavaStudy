@@ -1,4 +1,4 @@
-package me.lipiao.material_design.behavoir;
+package me.lipiao.material_design.behavoir.kaiyan;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
@@ -66,7 +66,7 @@ public class CoverHeaderScrollBehavior extends CoordinatorLayout.Behavior<View> 
         }
 
         float transY = child.getTranslationY() - dyUnconsumed;
-        Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dxUnconsumed);
+        Log.i(TAG, "------>transY:" + transY + "****** child.getTranslationY():" + child.getTranslationY() + "--->dyUnconsumed" + dyUnconsumed);
         if (transY > 0 && transY < getHeaderHeight()) {
             child.setTranslationY(transY);
         }

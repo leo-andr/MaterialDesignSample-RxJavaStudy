@@ -1,4 +1,4 @@
-package me.lipiao.material_design.behavoir;
+package me.lipiao.material_design.behavoir.edittext_scroll;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;

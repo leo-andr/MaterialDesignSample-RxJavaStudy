@@ -1,4 +1,4 @@
-package me.lipiao.material_design.behavoir;
+package me.lipiao.material_design.behavoir.edittext_scroll;
 
 import android.content.Context;
 import android.content.res.Resources;

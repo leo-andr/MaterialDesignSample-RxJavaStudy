@@ -38,15 +38,31 @@
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".behavoir.CustomBehaviorActivity"
+            android:name=".behavoir.edittext_scroll.EditScrollCustomBehaviorActivity"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".behavoir.CustomBehaviorActivity2"
+            android:name=".behavoir.kaiyan.KaiYanCustomBehaviorActivity"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".behavoir.FABSimpleActivity"
+            android:name=".behavoir.zhihu.ZhiHuCustomBehaviorActivity"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.fab.FabCustomBehaviorActivity"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.uc.sample1.UcSampleCustomBehaviorActivity1"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.uc.sample2.UsSampleCustomBehaviorActivity2"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.fab.FABSimpleActivity"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -71,6 +87,14 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".cardview.CardViewSimpleActivity"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.uc.mainpage.UsMainCustomBehaviorActivity"
+            android:theme="@style/MDTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".behavoir.xiami.XiaMiCustomBehaviorActivity"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
     </application>

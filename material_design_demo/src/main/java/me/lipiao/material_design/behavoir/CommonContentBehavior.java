@@ -10,7 +10,7 @@ import java.util.List;
 
 import me.lipiao.material_design.MaterialDesignSimpleApplication;
 import me.lipiao.material_design.R;
-import me.lipiao.material_design.behavoir.helper.HeaderScrollingViewBehavior;
+import me.lipiao.material_design.behavoir.source.HeaderScrollingViewBehavior;
 
 
 public class CommonContentBehavior extends HeaderScrollingViewBehavior {
