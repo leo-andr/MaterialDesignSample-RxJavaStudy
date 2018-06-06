@@ -58,7 +58,7 @@
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".behavoir.uc.sample2.UsSampleCustomBehaviorActivity2"
+            android:name=".behavoir.uc.sample2.UcSampleCustomBehaviorActivity2"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
@@ -90,7 +90,7 @@
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".behavoir.uc.mainpage.UsMainCustomBehaviorActivity"
+            android:name=".behavoir.uc.mainpage.UcMainCustomBehaviorActivity"
             android:theme="@style/MDTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity

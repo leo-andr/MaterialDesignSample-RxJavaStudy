@@ -11,9 +11,9 @@ import me.lipiao.material_design.behavoir.edittext_scroll.EditScrollCustomBehavi
 import me.lipiao.material_design.behavoir.fab.FABSimpleActivity;
 import me.lipiao.material_design.behavoir.fab.FabCustomBehaviorActivity;
 import me.lipiao.material_design.behavoir.kaiyan.KaiYanCustomBehaviorActivity;
-import me.lipiao.material_design.behavoir.uc.mainpage.UsMainCustomBehaviorActivity;
+import me.lipiao.material_design.behavoir.uc.mainpage.UcMainCustomBehaviorActivity;
 import me.lipiao.material_design.behavoir.uc.sample1.UcSampleCustomBehaviorActivity1;
-import me.lipiao.material_design.behavoir.uc.sample2.UsSampleCustomBehaviorActivity2;
+import me.lipiao.material_design.behavoir.uc.sample2.UcSampleCustomBehaviorActivity2;
 import me.lipiao.material_design.behavoir.xiami.XiaMiCustomBehaviorActivity;
 import me.lipiao.material_design.behavoir.zhihu.ZhiHuCustomBehaviorActivity;
 import me.lipiao.material_design.bottomsheetdialog.BottomSheetDialogActivity;
@@ -101,11 +101,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.custom_behavior6:
-                intent = new Intent(this, UsSampleCustomBehaviorActivity2.class);
+                intent = new Intent(this, UcSampleCustomBehaviorActivity2.class);
                 startActivity(intent);
                 break;
             case R.id.custom_behavior7:
-                intent = new Intent(this, UsMainCustomBehaviorActivity.class);
+                intent = new Intent(this, UcMainCustomBehaviorActivity.class);
                 startActivity(intent);
                 break;
             case R.id.custom_behavior8:

@@ -18,7 +18,7 @@ import me.lipiao.material_design.TypePageAdapter;
  * @date 2018/6/6.
  * @description uc主页
  */
-public class UsMainCustomBehaviorActivity extends AppCompatActivity implements MainHeaderBehavior.OnHeaderStateListener{
+public class UcMainCustomBehaviorActivity extends AppCompatActivity implements MainHeaderBehavior.OnHeaderStateListener{
 
     private ViewPager mViewPager;
 

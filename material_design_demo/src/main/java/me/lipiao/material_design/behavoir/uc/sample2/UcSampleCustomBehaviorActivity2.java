@@ -15,7 +15,7 @@ import me.lipiao.material_design.utils.Utils;
  * @date 2018/6/6.
  * @description 仿UC浏览器主页2
  */
-public class UsSampleCustomBehaviorActivity2 extends AppCompatActivity {
+public class UcSampleCustomBehaviorActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
