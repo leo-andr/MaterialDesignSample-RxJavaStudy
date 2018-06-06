@@ -8,5 +8,5 @@
 - 画廊RecyclerView [用RecyclerView做一个小清新的Gallery效果](https://github.com/ryanlijianchang/Recyclerview-Gallery)
 - 常见MaterialDesign  
 [Material Design场景示例](https://github.com/pinguo-zhouwei/MaterialDesignSamples)  
-[自定义behavior1](https://www.jianshu.com/p/b987fad8fcb4)  
-[自定义behavior2](https://www.jianshu.com/p/c174edcce58d)
+[自定义behavior1](https://www.jianshu.com/p/b987fad8fcb4)
+<br/>[自定义behavior2](https://www.jianshu.com/p/c174edcce58d)</br>
