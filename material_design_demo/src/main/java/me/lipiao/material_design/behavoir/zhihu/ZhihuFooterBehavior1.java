@@ -15,7 +15,7 @@ import android.view.View;
  * @description 缺陷：在layoutDependsOn判断dependency是否是AppBarLayout的实现类，会导致child依赖于 AppBarLayout，灵活性太低
  * @see ZhihuFooterBehavior2
  */
-public class ZhihuFooterBehavior1 extends CoordinatorLayout.Behavior<View>{
+public class ZhihuFooterBehavior1 extends CoordinatorLayout.Behavior<View> {
     private static final String TAG = "ZhihuFooterBehavior1";
 
     public ZhihuFooterBehavior1(Context context, AttributeSet attrs) {
@@ -35,7 +35,10 @@ public class ZhihuFooterBehavior1 extends CoordinatorLayout.Behavior<View>{
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         // 根据dependency top值的变化改变 child 的 translationY
-        float translationY = Math.abs(dependency.getTop());
+        // 按AppBarLayout移出高度计算 这个方法有个问题，当底部导航栏高度大于AppBarLayout高度，会有明显导航栏部分不会消失问题
+//        float translationY = Math.abs(dependency.getTop());
+        // 按比例计算
+        float translationY = child.getHeight() * ((float) Math.abs(dependency.getTop()) / (float) dependency.getHeight());
         child.setTranslationY(translationY);
         Log.e(TAG, "onDependentViewChanged: translationY" + translationY);
         return true;
