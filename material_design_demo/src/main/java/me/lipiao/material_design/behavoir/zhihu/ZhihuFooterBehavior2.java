@@ -91,7 +91,12 @@ public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                // todo 这个有问题，gone了之后，onNestedPreScroll不再有任何反应，还不太明白
+                // todo 设置为gone之后，onNestedPreScroll将不再执行到,源码分析：
+                /**
+                 * @see CoordinatorLayout#onNestedPreScroll(View, int, int, int[], int)
+                 * #1836行  if (view.getVisibility() == GONE) // If the child is GONE, skip...continue;}
+                 * todo 同理 其他如 onNestedScroll onNestedPreScroll onNestedFling onNestedPreFling这四个方法都将不再执行
+                 */
 //                view.setVisibility(View.GONE);
             }
 
