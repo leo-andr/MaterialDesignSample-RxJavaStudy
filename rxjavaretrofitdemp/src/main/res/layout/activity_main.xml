@@ -76,7 +76,7 @@
         <Button
             android:id="@+id/btn12"
             style="@style/myButtonStyle"
-            android:text="合并操作符,reduce()聚合"
+            android:text="合并操作符,reduce()/scan()聚合"
             app:layout_constraintTop_toBottomOf="@+id/btn11" />
 
         <Button

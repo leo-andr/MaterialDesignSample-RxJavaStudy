@@ -975,7 +975,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * 合并操作符,reduce()聚合
+     * 合并操作符,reduce()/scan聚合
      * 把被观察者需要发送的事件聚合成1个事件 & 发送
      */
     private void reduceDemo() {
@@ -984,8 +984,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public Integer apply(Integer integer, Integer integer2) throws Exception {
                         Log.e(TAG, "reduce() -apply: " + integer + "--" + integer2);
+                        // 1-2 2-3 6-4
                         return integer * integer2;
-                        // 本次聚合的逻辑是：全部数据相乘起来
+                        // 本次聚合的逻辑是：全部数据相乘起来,将所有数据聚合在一起才会发送事件给观察者。
                         // 原理：第1次取前2个数据相乘，之后每次获取到的数据 = 返回的数据 x 原始下1个数据
                         // 即：1*2=2  2*3=6 6*4=24
                         // reduce() 聚合规则根据自己的需求随意撰写
@@ -994,6 +995,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void accept(Integer integer) throws Exception {
                 Log.e(TAG, "reduce() - accept: " + integer);
+                // 24
+            }
+        });
+
+        Observable.just(1, 2, 3, 4)
+                .scan(new BiFunction<Integer, Integer, Integer>() {
+                    @Override
+                    public Integer apply(Integer integer, Integer integer2) throws Exception {
+                        Log.e(TAG, "scan() -apply: " + integer + "--" + integer2);
+                        // 1-2 2-3 6-4
+                        return integer * integer2;
+                        // 本次聚合的逻辑是：全部数据相乘起来,每处理一次数据就会将事件发送给观察者
+                        // 原理：第1次取前2个数据相乘，之后每次获取到的数据 = 返回的数据 x 原始下1个数据
+                        // 即：1*2=2  2*3=6 6*4=24
+                        // reduce() 聚合规则根据自己的需求随意撰写
+                    }
+                }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.e(TAG, "scan() - accept: " + integer);
+                // 2 6 24
             }
         });
     }
