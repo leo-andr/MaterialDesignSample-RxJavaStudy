@@ -10,10 +10,11 @@ import android.view.View;
 /**
  * @author lipiao
  * @date 2018/6/5.
- * @description 知乎首页 底部控件上拉消失下拉出现 自定义Behavior第一种实现方式
+ * @description 知乎首页 底部控件上拉消失下拉出现 自定义Behavior第一种实现方式 监控AppBarLayout，配合AppBarLayout上滑以及快速返回，底部做相应位移操作
  * @description 缺陷：主要是重写layoutDependsOn 和 onDependentViewChanged 这两个方法
  * @description 缺陷：在layoutDependsOn判断dependency是否是AppBarLayout的实现类，会导致child依赖于 AppBarLayout，灵活性太低
  * @see ZhihuFooterBehavior2
+ * @see ZhihuFooterBehavior3
  */
 public class ZhihuFooterBehavior1 extends CoordinatorLayout.Behavior<View> {
     private static final String TAG = "ZhihuFooterBehavior1";

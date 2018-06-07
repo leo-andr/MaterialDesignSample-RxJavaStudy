@@ -20,7 +20,8 @@ import me.lipiao.material_design.utils.Utils;
  * todo 第二种有问题！！
  * @see ZhihuFooterBehavior1
  * @see ZhihuFooterBehavior2
- * 需要注意的是不管是第一种方法，还是第二种方法，我们都需要重写带两个构造方法的函数，因为底层机制会采用反射的形式获得该对象
+ * @see ZhihuFooterBehavior3
+ * 需要注意的是不管是哪一种方法，我们都需要重写带两个构造方法的函数，因为底层机制会采用反射的形式获得该对象
  */
 public class ZhiHuCustomBehaviorActivity extends AppCompatActivity {
 

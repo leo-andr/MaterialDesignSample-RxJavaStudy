@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,11 @@ import android.view.animation.Interpolator;
 /**
  * @author lipiao
  * @date 2018/6/5.
- * @description 知乎首页 底部控件上拉消失下拉出现 自定义Behavior第二种实现方式
+ * @description 知乎首页 底部控件上拉消失下拉出现 自定义Behavior第二种实现方式 监控recyclerView，记录recyclerView滑动距离，比较操作底部导航栏高度，底部做相应位移操作
  * @description 主要是重写onStartNestedScroll 和 onNestedPreScroll 这两个方法，
  * @description 判断是否是垂直滑动，是的话就进行处理，灵活性大大增强，推荐使用这一种方法
- * todo 这个有问题啊，上拉消失之后，之后就没有任何效果了！！
  * @see ZhihuFooterBehavior1
+ * @see ZhihuFooterBehavior3
  */
 public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
     /*
@@ -44,6 +45,11 @@ public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
         super(context, attrs);
     }
 
+    @Override
+    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
+        return dependency instanceof RecyclerView;
+    }
+
     // 1.判断滑动的方向 我们需要垂直滑动
     @Override
     public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,
@@ -62,14 +68,13 @@ public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
             sinceDirectionChange = 0;
         }
         sinceDirectionChange += dy;
-        int visibility = child.getVisibility();
         Log.e(TAG, "onNestedPreScroll: sinceDirectionChange = " + sinceDirectionChange);
-        if (sinceDirectionChange > child.getHeight() && visibility == View.VISIBLE) {
+        if (sinceDirectionChange > child.getHeight()) {
             hide(child);
-        } else {
-            if (sinceDirectionChange < 0 && (visibility == View.GONE || visibility == View.INVISIBLE)) {
-                show(child);
-            }
+            sinceDirectionChange = 0;
+        } else if (sinceDirectionChange < 0 && Math.abs(sinceDirectionChange) >= child.getHeight()) {
+            show(child);
+            sinceDirectionChange = 0;
         }
     }
 
@@ -86,7 +91,8 @@ public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.GONE);
+                // todo 这个有问题，gone了之后，onNestedPreScroll不再有任何反应，还不太明白
+//                view.setVisibility(View.GONE);
             }
 
             @Override
@@ -115,7 +121,7 @@ public class ZhihuFooterBehavior2 extends CoordinatorLayout.Behavior<View> {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                view.setVisibility(View.VISIBLE);
+//                view.setVisibility(View.VISIBLE);
             }
 
             @Override

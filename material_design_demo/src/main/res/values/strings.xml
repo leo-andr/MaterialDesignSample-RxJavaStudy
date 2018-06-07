@@ -18,9 +18,12 @@
     <string name="content_behavior" translatable="false">me.lipiao.material_design.behavoir.edittext_scroll.HeaderScrollBehavior</string>
 
     <!-- 知乎首页底部导航栏效果 -->
+    <!-- 监控AppBarLayout，配合AppBarLayout上滑以及快速返回，底部做相应位移操作 -->
     <string name="zhihu_footer_behavior1" translatable="false">me.lipiao.material_design.behavoir.zhihu.ZhihuFooterBehavior1</string>
-    <!-- 这个还有点问题 -->
+    <!-- 监控recyclerView，记录recyclerView滑动距离，比较操作底部导航栏高度，底部做相应位移操作 -->
     <string name="zhihu_footer_behavior2" translatable="false">me.lipiao.material_design.behavoir.zhihu.ZhihuFooterBehavior2</string>
+    <!-- 直接监控recyclerView是否滑动以及滑动方向即可 -->
+    <string name="zhihu_footer_behavior3" translatable="false">me.lipiao.material_design.behavoir.zhihu.ZhihuFooterBehavior3</string>
 
     <!-- FloatingActionButton的显示与隐藏 -->
     <!-- 1.缩放模式 -->
