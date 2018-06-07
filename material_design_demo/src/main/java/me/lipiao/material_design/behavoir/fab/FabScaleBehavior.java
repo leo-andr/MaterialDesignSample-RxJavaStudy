@@ -46,7 +46,7 @@ public class FabScaleBehavior extends FloatingActionButton.Behavior {
             if (mOnStateChangedListener != null) {
                 mOnStateChangedListener.onChanged(false);
             }
-        } else if ((dyConsumed < 0 || dyUnconsumed < 0)) {
+        } else if ((dyConsumed < 0 || dyUnconsumed < 0) && !isAnimatingOut) {
             AnimatorUtil.scaleShow(child, viewPropertyAnimatorListener);
             if (mOnStateChangedListener != null) {
                 mOnStateChangedListener.onChanged(true);
