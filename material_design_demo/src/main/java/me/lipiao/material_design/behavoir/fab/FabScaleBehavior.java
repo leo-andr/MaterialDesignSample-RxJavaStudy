@@ -37,21 +37,17 @@ public class FabScaleBehavior extends FloatingActionButton.Behavior {
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 
-
-
     @Override
     public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull FloatingActionButton child,
                                @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type) {
         Log.e(TAG, "dyConsumed = " + dyConsumed + "\ndyUnconsumed = " + dyUnconsumed);
-        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimatingOut && child.getVisibility() == View.VISIBLE) { // 往下滑
-            Log.e(TAG, "onNestedScroll: 111" );
+        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimatingOut) { // 往下滑
             AnimatorUtil.scaleHide(child, viewPropertyAnimatorListener);
             if (mOnStateChangedListener != null) {
                 mOnStateChangedListener.onChanged(false);
             }
-        } else if ((dyConsumed < 0 || dyUnconsumed < 0) && child.getVisibility() != View.VISIBLE) {
-            Log.e(TAG, "onNestedScroll: 222" );
-            AnimatorUtil.scaleShow(child, null);
+        } else if ((dyConsumed < 0 || dyUnconsumed < 0)) {
+            AnimatorUtil.scaleShow(child, viewPropertyAnimatorListener);
             if (mOnStateChangedListener != null) {
                 mOnStateChangedListener.onChanged(true);
             }
@@ -89,7 +85,6 @@ public class FabScaleBehavior extends FloatingActionButton.Behavior {
         @Override
         public void onAnimationEnd(View view) {
             isAnimatingOut = false;
-            view.setVisibility(View.GONE);
         }
 
         @Override

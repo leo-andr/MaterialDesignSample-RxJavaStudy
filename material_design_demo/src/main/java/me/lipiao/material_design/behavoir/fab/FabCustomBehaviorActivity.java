@@ -16,7 +16,6 @@ import me.lipiao.material_design.utils.Utils;
  * @description 自定义 Behavior 实现 FloatingActionButton的显示与隐藏
  * 1.缩放
  * 2.位移
- * 两者都有问题，缩回去就出不来了
  */
 public class FabCustomBehaviorActivity extends AppCompatActivity {
     @Override

@@ -15,12 +15,11 @@ public class AnimatorUtil {
 
     // 显示view
     public static void scaleShow(View view, ViewPropertyAnimatorListener viewPropertyAnimatorListener) {
-        view.setVisibility(View.VISIBLE);
         ViewCompat.animate(view)
                 .scaleX(1.0f)
                 .scaleY(1.0f)
                 .alpha(1.0f)
-                .setDuration(800)
+                .setDuration(200)
                 .setListener(viewPropertyAnimatorListener)
                 .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
                 .start();
@@ -32,7 +31,7 @@ public class AnimatorUtil {
                 .scaleX(0.0f)
                 .scaleY(0.0f)
                 .alpha(0.0f)
-                .setDuration(800)
+                .setDuration(200)
                 .setInterpolator(FAST_OUT_SLOW_IN_INTERPOLATOR)
                 .setListener(viewPropertyAnimatorListener)
                 .start();

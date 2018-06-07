@@ -53,7 +53,7 @@
         android:layout_marginRight="25dp"
         android:background="@android:color/holo_green_light"
         android:src="@mipmap/icon_close"
-        app:layout_behavior="@string/fab_translation_behavior"/>
+        app:layout_behavior="@string/fab_scale_behavior"/>
     <!-- app:layout_behavior="@string/fab_scale_behavior"
       app:layout_behavior="@string/fab_translation_behavior"-->
 
