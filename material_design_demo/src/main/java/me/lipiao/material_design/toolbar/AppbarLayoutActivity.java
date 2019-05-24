@@ -47,9 +47,9 @@ public class AppbarLayoutActivity extends AppCompatActivity {
                 Log.e("zhouwei", "appbarHeight:" + appBarLayout.getHeight() + " getTotalScrollRange:" + appBarLayout.getTotalScrollRange() + " offSet:" + verticalOffset);
                 if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-                    collapsingToolbarLayout.setTitle("AppbarLayout");
+                    toolbar.setTitle("AppbarLayout");
                 } else {
-                    collapsingToolbarLayout.setTitle("");
+                    toolbar.setTitle("");
                 }
             }
         });

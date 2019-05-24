@@ -34,7 +34,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.bigkoo:convenientbanner:2.0.0'//banner
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.bigkoo:convenientbanner:2.0.0'//banner
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
 }

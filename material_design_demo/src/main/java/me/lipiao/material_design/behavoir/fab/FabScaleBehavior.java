@@ -41,7 +41,7 @@ public class FabScaleBehavior extends FloatingActionButton.Behavior {
     public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull FloatingActionButton child,
                                @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type) {
         Log.e(TAG, "dyConsumed = " + dyConsumed + "\ndyUnconsumed = " + dyUnconsumed);
-        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimatingOut) { // 往下滑
+        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimatingOut) { // 往上滑
             AnimatorUtil.scaleHide(child, viewPropertyAnimatorListener);
             if (mOnStateChangedListener != null) {
                 mOnStateChangedListener.onChanged(false);
