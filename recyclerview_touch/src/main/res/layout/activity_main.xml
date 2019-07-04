@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.recyclerview_touch.MyRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="horizontal"
+    android:id="@+id/rlRoot">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvContentScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="我是正一屏"
+        android:gravity="center"
+        android:background="#ffffff"/>
+
+    <TextView
+        android:id="@+id/tvSlideScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="我是负一屏"
+        android:gravity="center"
+        android:background="#00ffff"/>
+
+</com.example.recyclerview_touch.MyRelativeLayout>
