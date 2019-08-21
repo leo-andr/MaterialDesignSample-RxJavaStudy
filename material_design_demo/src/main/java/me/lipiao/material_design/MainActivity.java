@@ -80,6 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, BehaviorSimpleActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.bottom_sheet_demo:
+                intent = new Intent(this, BottomSheetBehaviorActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.fab_snack_btn:
+                intent = new Intent(this, FABSimpleActivity.class);
+                startActivity(intent);
+                break;
             case R.id.custom_behavior:
                 intent = new Intent(this, EditScrollCustomBehaviorActivity.class);
                 startActivity(intent);
@@ -110,14 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.custom_behavior8:
                 intent = new Intent(this, XiaMiCustomBehaviorActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.fab_snack_btn:
-                intent = new Intent(this, FABSimpleActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.bottom_sheet_demo:
-                intent = new Intent(this, BottomSheetBehaviorActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tab_layout_simple1:
