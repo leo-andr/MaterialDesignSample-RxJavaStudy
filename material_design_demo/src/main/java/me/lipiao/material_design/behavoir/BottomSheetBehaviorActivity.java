@@ -23,7 +23,8 @@ public class BottomSheetBehaviorActivity extends AppCompatActivity {
         final BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from(shareView);
 
         //设置折叠时的高度
-        //sheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+//        sheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+        sheetBehavior.setPeekHeight(700);
 
         //监听BottomSheetBehavior 状态的变化
         sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
@@ -39,7 +40,7 @@ public class BottomSheetBehaviorActivity extends AppCompatActivity {
         });
 
         //下滑的时候是否可以隐藏
-        sheetBehavior.setHideable(true);
+        sheetBehavior.setHideable(false);
         findViewById(R.id.btn_show_bottom_sheet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
